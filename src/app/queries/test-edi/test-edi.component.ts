@@ -47,7 +47,7 @@ export class TestEdiComponent implements OnInit {
 
   response = {
     ediMessage : "A1401S5G                 AX                                                     B  1401S5GAX                                                                    E0 SUMMRY 000001 REF ID: S5G 00000018                                           E1 F122   BOND WAIVER IND MUST BE 0               S5G  00000018                 Y  1401S5GAX00004                                                               Z1401S5G"  
-
+    
   }
 
 }
