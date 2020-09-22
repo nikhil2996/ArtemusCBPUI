@@ -1,0 +1,87 @@
+<div class="container" >
+        <h6 class="form-title" style="text-align: center;font-weight: bold">Entry Summary Query</h6>
+
+<form [formGroup]="entrySummeryForm" (ngSubmit) = "onGetReportsEntrySummery()">
+
+        <div formArrayName="entries">
+        <div class="animated fadeIn" *ngFor="let entry of entrySummeryForm.controls.entries['controls']; let i = index" [formArrayName]="i">  
+        <div class="row new-form-row" style="margin-top: 20px;">
+        <div class="col-md-2 form-lable">
+        <span> Release Port:</span>         
+        </div> 
+        <div class="col-md-3 form-lable"> 
+        <input name="releasePort" type="text" id="releasePort" formControlName="releasePort" maxlength="4" class="form-control form-control-sm" 
+        title= "Begin by typing the Port name where shipment will arrive for clearance ">        
+        </div>
+        <div class="col-md-2 form-lable">
+        <span> Entry Number:</span>         
+        </div>
+        <div class="col-md-3 form-lable"> 
+        <input name="entryNumber" type="text" id="entryNumber" formControlName="entryNumber" maxlength="9" class="form-control form-control-sm" 
+        title= "Enter the Enter Number ">          
+        </div>  
+        <div class="col-md-2 form-lable"> 
+        <a (click)="removeEntries(i)" *ngIf="count > 1">Remove Entry</a>         
+        </div>             
+        </div>        
+        </div>        
+        </div> 
+        
+        <div class="row new-form-row" >
+        <div class="col-md-3 form-lable">
+        <a (click)="addEntries()" >Add another Entry</a>
+        </div>
+        <div class="col-md-3 form-lable"></div> 
+        </div>
+
+        <div class="row new-form-row" style="margin-top: 20px;">
+        <div class="col-md-2 form-lable">
+        <span> Criteria Query Type:</span>         
+        </div> 
+        <div class="col-md-3 form-lable"> 
+        <select class="form-control form-control-sm" id="criteriaQueryType" 
+        name="criteriaQueryType" formControlName="criteriaQueryType">
+        <option *ngFor="let criteriaQueryType of criteriaQueryTypeList" [ngValue]="criteriaQueryType.code">{{ criteriaQueryType.text }}</option>
+        </select>        
+        </div>
+        <div class="col-md-2 form-lable">
+        <span> Include Entry Details:</span>         
+        </div>
+        <div class="col-md-3 form-lable"> 
+        <input class="form-check-input form-checkbox" type="checkbox" name="includeEntryDetails" id="includeEntryDetails" formControlName="includeEntryDetails" >
+        </div>               
+        </div>
+
+        <div class="row new-form-row" style="margin-top: 20px;">
+        <div class="col-md-2 form-lable">
+        <span> Requested From Date:</span>         
+        </div> 
+        <div class="col-md-3 form-lable"> 
+        <input name="fromDate" type="text" id="fromDate" formControlName="fromDate"  class="form-control form-control-sm" >         
+        </div>
+        <div class="col-md-2 form-lable">
+        <span> Requested To Date:</span>         
+        </div>
+        <div class="col-md-3 form-lable"> 
+        <input name="toDate" type="text" id="toDate" formControlName="toDate"  class="form-control form-control-sm" >
+        </div>               
+        </div>
+
+
+
+
+
+        <div class="row new-form-row">
+        <div class="col-md-10 form-lable">
+        </div>   
+        <div class="col-md-2 form-lable">
+        <button type="submit" class="btn btn-info" [disabled]="!entrySummeryForm.valid">Get Reports</button>
+        </div>     
+        </div>
+
+</form>
+
+
+
+
+</div>

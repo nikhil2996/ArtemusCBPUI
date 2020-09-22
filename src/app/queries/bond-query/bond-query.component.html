@@ -1,0 +1,461 @@
+<div class="container" >
+        <h6 class="form-title" style="text-align: center;font-weight: bold">Importer/Bond Query Form</h6>
+        
+<form [formGroup]="importerBondForm" (ngSubmit) = "onGetReportsimporterBond()">
+
+        <div formArrayName="importers" >        
+        <div class="animated fadeIn" *ngFor="let importer of importerBondForm.controls.importers['controls']; let i = index" [formArrayName]="i">
+        
+               
+        <div class="row new-form-row" style="margin-top: 20px;">
+        <div class="col-md-3 form-lable">
+        <span> Importer Of Record:</span>
+        </div>
+        <div class="col-md-3 form-lable">  
+        <input name="importerNo" type="text" id="importerNo" formControlName="importerNo" maxlength="12" class="form-control form-control-sm" 
+        title= " Enter CBP Assigned number,IRS Number or Social Security Number ">                      
+        </div>
+        </div> 
+        <div class="row new-form-row">
+        <div class="col-md-3 form-lable">
+        <span >Address Request Code:</span>
+        </div>  
+        <div class="col-md-3 form-lable">     
+        <select id="addressReqCode" name="addressReqCode" formControlName="addressReqCode" class="form-control form-control-sm" >
+        <option *ngFor="let AddressReqCode of AddressReqCodeList" [value]="AddressReqCode.id">
+        {{AddressReqCode.name}}
+        </option>
+        </select>
+        </div>
+        <div class="col-md-3 form-lable">
+        <a (click)="removeImporter(i)" *ngIf="count > 1">Remove Importer</a>       
+        </div>   
+        </div> 
+
+</div>
+</div>
+
+
+        <div class="row new-form-row">
+        <div class="col-md-3 form-lable">
+        <a (click)="addImporter()" >Add another Importer</a>        
+        </div> 
+        <div class="col-md-3 form-lable">       
+        </div> 
+        </div>
+        
+        <div class="row new-form-row">
+        <div class="col-md-10 form-lable">
+        </div>   
+        <div class="col-md-2 form-lable">
+        <button type="submit" class="btn btn-info" [disabled]="!importerBondForm.valid">Get Reports</button>
+        </div>     
+        </div>
+</form>
+      
+<hr>
+        <div id="masterImporterobject" *ngIf='objImporterBondMaster'>
+
+        <div id="responseDiv" *ngFor='let importer of objImporterBondMaster; let i = index'>
+
+        <div *ngFor="let K1Status of importer.statusK1; let j=index">
+        
+        <div *ngIf="importer.statusK1"> 
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Importer Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK1[j].importerNumber}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Query Results Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK1[j].queryResultsCode}} 
+        </div>                
+        </div>
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Importer’s Name:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK1[j].importersName}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Surety Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK1[j].suretyCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Bond Type/Activity Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK1[j].bondTypeCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Bond Amount:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK1[j].bondAmount}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >District/Port Where Bond Was Filed:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK1[j].disstrictWhereBondWasFiled}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Bond Effective Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK1[j].bondEffectiveDate}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Bond Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK1[j].bondNumber}} 
+        </div>                
+        </div>
+
+        </div> 
+
+        <div *ngIf="importer.statusK2.length>0"> 
+       
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Name Qualifier:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK2[j].nameQualifier}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Line Two of Importer Name:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK2[j].lineTwoOfImporterName}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Bond Termination Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK2[j].bondTerminationDate}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Periodic Monthly Statement Status:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK2[j].periodicMonthlyStatementStat}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Bond Sufficiency Indicator:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK2[j].bondSufficiencyIndicator}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Bond User Status Indicator:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK2[j].bondUserStatIndicator}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Bond User Termination Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK2[j].bondUserTerminationDate}} 
+        </div>                
+        </div>
+
+        </div>
+
+        <div *ngIf="importer.statusK8.length>0">
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Additional Information Qualifier Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK8[j].additionalInformationQualifierCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Additional Information:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK8[j].additionalInformation}} 
+        </div>                
+        </div>
+
+        </div> 
+
+        <!-- <span *ngIf="importer.statusK1">{{importer.statusK1[j].bondNumber}}</span> -->       
+        <!-- <span *ngIf="importer.statusK2">{{importer.statusK2[j]|json}}</span>  -->
+        </div>  
+
+        <div *ngIf="importer.statusK3">
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Address Line One:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK3.addressLineOne}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Address Line Two:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK3.addressLineTwo}} 
+        </div>                
+        </div>
+
+        </div>
+
+        <div *ngIf="importer.statusK4">
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >City:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK4.city}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >State Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK4.stateCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Postal Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK4.postalCode}} 
+        </div>                
+        </div>
+
+        </div>
+
+        <div *ngIf="importer.statusK5">
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Address Line One:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK5.addressLineOne}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Address Line Two:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK5.addressLineTwo}} 
+        </div>                
+        </div>
+
+        </div>
+
+        <div *ngIf="importer.statusK6">
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >City:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK6.city}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >State Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK6.stateCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Postal Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK6.postalCode}} 
+        </div>                
+        </div>
+
+        </div>
+
+        <div *ngIf="importer.statusK7">
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Full Legal Importer Name:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK7.fullLegalImporterName}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Center Identifier:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK7.centerIdentifier}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Center ID Description:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{importer.statusK7.centerIdDescription}} 
+        </div>                
+        </div>
+
+        </div>
+
+        </div>
+
+        </div>
+
+
+</div>   
+
+
+<!-- <form [formGroup]="form">
+                <input type="checkbox" formControlName="published"> Published
+                <div *ngIf="form.controls.published.value">
+          
+                  <h2>Credentials</h2>
+                  <button (click)="addCreds()">Add</button>
+          
+                  <div formArrayName="credentials" *ngFor="let creds of form.controls.credentials?.value; let i = index">
+                    <ng-container [formGroupName]="i">
+                      <input placeholder="Username" formControlName="username">
+                      <input placeholder="Password" formControlName="password">
+                      <button (click)="removeCreds(i)">remove</button>
+                    </ng-container>
+                  </div>
+                  
+                </div>
+              </form>  -->
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+                        <!--   <form [formGroup]="bondQueryForm" (ngSubmit)="onGetReports()" class="animated fadeIn">
+                <div class="row new-form-row">
+                    <div class="col-md-3 form-lable">
+                            <span >Importer Of Record:</span>
+                    </div>
+                    <div class="col-md-3 form-lable">     
+                            <input name="InboundNo" type="text" id="InboundNo" maxlength="12" class="form-control form-control-sm" 
+                            title= " Enter CBP Assigned number,IRS Number or Social Security Number "  ngModel required>
+                    </div>
+                </div> 
+                    
+                <div class="row new-form-row">
+                        <div class="col-md-3 form-lable">
+                                <span >Address Request Code:</span>
+                        </div>  
+                        <div class="col-md-3 form-lable">     
+                                <select id="AddressReqCode" name="AddressReqCode" class="form-control form-control-sm" [(ngModel)]="AddressReqCode">
+                                        <option *ngFor="let AddressReqCode of AddressReqCodeList" [value]="AddressReqCode.id">
+                                          {{AddressReqCode.name}}
+                                        </option>
+                                </select>
+                        </div>    
+                </div>
+
+
+
+                <div class="row new-form-row">
+                    <div class="col-md-10">
+                        <a (click)="removeUser(i)">Remove</a>
+                    </div>
+                    <div class="col-md-2">
+                      <input type="submit" class="btn btn-info"  value="Get Reports">
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+
+        <div class="row new-form-row">
+                <div class="col-md-3 form-lable">
+                    <a (click)="addUser()" >Add User</a>
+                </div>
+        </div> 
+            
+-->     
+            
+<!--</div>-->

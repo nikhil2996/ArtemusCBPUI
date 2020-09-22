@@ -1,0 +1,1519 @@
+<div class="container" >
+
+<h6 class="form-title" style="text-align: center;font-weight: bold">Cargo Manifest Status Form</h6>  
+
+
+<div class="row new-form-row" style="margin-top: 20px;">
+<div class="col-md-3"></div>
+<div class="col-md-3">
+<select class="form-control form-control-sm" [(ngModel)]="queryStatus" (change)="formsReset()">
+<option *ngFor="let queryStatus of queryStatusList" [ngValue]="queryStatus.code">{{ queryStatus.text }}</option>
+</select>
+</div>
+</div>
+<div id="formDiv" class="animated fadeIn"   *ngIf="queryStatus=='IS'">
+        <form [formGroup]="inBoundForm" (ngSubmit) = "onGetReportsInBound()"> 
+        <div class="row new-form-row"> 
+        <div class="col-md-3 form-lable">
+        <span >Inbond (IT) Number:</span>           
+        </div>
+        <div class="col-md-3 form-lable"> 
+        <input type="text" id="inBoundNo" name="inBoundNo" title="Enter the InBound Number" maxlength="12" 
+        class="form-control form-control-sm" formControlName="inBoundNo">
+        </div>
+        </div>  
+        <div class="row new-form-row">
+        <div class="col-md-3 form-lable">
+        <span>Limit Results:</span>        
+        </div>
+        <div class="col-md-3 form-lable"> 
+        <select class="form-control form-control-sm" id="limitOutputOption" 
+         name="limitOutputOption" formControlName="limitOutputOption">
+        <option *ngFor="let limitOutput of limitResultList" [ngValue]="limitOutput.code">{{ limitOutput.text }}</option>
+        </select>              
+        </div>        
+         </div> 
+         
+        <div class="row new-form-row">
+        <div class="col-md-10">
+        </div>
+        <div class="col-md-2">
+        <button type="submit" class="btn btn-info" [disabled]="!inBoundForm.valid">Get Reports</button>
+        </div>
+        </div>   
+        </form>              
+</div>
+<div id="formDiv" class="animated fadeIn"   *ngIf="queryStatus=='ES'">
+<form [formGroup]="entryForm" (ngSubmit) = "onGetReportsEntry()"> 
+        <div class="row new-form-row"> 
+        <div class="col-md-3 form-lable">
+        <span >Entry Filer Code:</span>           
+        </div>
+        <div class="col-md-3 form-lable"> 
+        <input type="text" id="entryCode" name="entryCode" title="Enter the 3 digit filer code under which Importer will submit entries" maxlength="3" 
+        class="form-control form-control-sm" formControlName="entryCode">
+        </div>
+        </div> 
+        <div class="row new-form-row">                  
+        <div class="col-md-3 form-lable">
+        <span >Entry Number:</span>
+        </div>
+        <div class="col-md-3 form-lable">
+        <input type="text" id="entryNumber" name="entryNumber" title="Enter the Entry Number" maxlength="11" 
+        class="form-control form-control-sm" formControlName="entryNumber">       
+        </div>
+        </div>
+        <div class="row new-form-row">
+        <div class="col-md-3 form-lable">
+        <span>Request for Bill of lading and Entry data indicator:</span>        
+        </div>
+        <div class="col-md-3 form-lable"> 
+        <input class="form-check-input form-checkbox" type="checkbox" name="bolIndicator" id="bolIndicator" formControlName="bolIndicator" >              
+        </div>        
+        </div>
+        <div class="row new-form-row">
+        <div class="col-md-3 form-lable">
+        <span>Limit Results:</span>        
+        </div>
+        <div class="col-md-3 form-lable"> 
+        <select class="form-control form-control-sm" id="limitOutputOption" name="limitOutputOption" formControlName="limitOutputOption">
+        <option *ngFor="let limitOutput of limitResultList" [ngValue]="limitOutput.code">{{ limitOutput.text }}</option>
+        </select>              
+        </div>        
+        </div>
+                                
+        <div class="row new-form-row">
+        <div class="col-md-10">
+        </div>
+        <div class="col-md-2">
+        <button type="submit" class="btn btn-info" [disabled]="!entryForm.valid">Get Reports</button>
+        </div>
+        </div>   
+</form>             
+</div>
+<div id="formDiv" class="animated fadeIn"   *ngIf="queryStatus=='SBS'">
+<form [formGroup]="surfaceBillOfLadingForm" (ngSubmit) = "onGetReportsBOL()">
+        <div class="row new-form-row"> 
+        <div class="col-md-3 form-lable">
+        <span >Issuer Code of Bill of Lading Number (SCAC):</span>           
+        </div>
+        <div class="col-md-3 form-lable"> 
+        <input type="text" id="scacCode" name="scacCode" title="Enter the 4 digit SCAC Code" maxlength="4" class="form-control form-control-sm" formControlName="scacCode">
+        </div>
+        </div> 
+        <div class="row new-form-row">                  
+        <div class="col-md-3 form-lable">
+        <span >Ocean Bill of Lading Number:</span>
+        </div>
+        <div class="col-md-3 form-lable">
+        <input type="text" id="billNo" name="billNo" title="Enter the Bill Number" maxlength="12" class="form-control form-control-sm" formControlName="billNo">       
+        </div>
+        </div>
+        <div class="row new-form-row">
+        <div class="col-md-3 form-lable">
+        <span>Get Related House/Master Bills:</span>        
+        </div>
+        <div class="col-md-3 form-lable"> 
+        <input class="form-check-input form-checkbox" type="checkbox" name="bolIndicator" id="bolIndicator" formControlName="bolIndicator" >              
+        </div>        
+        </div>
+        <div class="row new-form-row">
+        <div class="col-md-3 form-lable">
+        <span>Limit Results:</span>        
+        </div>
+        <div class="col-md-3 form-lable"> 
+        <select class="form-control form-control-sm" id="limitOutputOption" name="limitOutputOption" formControlName="limitOutputOption">
+        <option *ngFor="let limitOutput of limitResultList" [ngValue]="limitOutput.code">{{ limitOutput.text }}</option>
+        </select>              
+        </div>        
+        </div>
+        
+        <div class="row new-form-row">
+        <div class="col-md-10">
+        </div>
+        <div class="col-md-2">
+        <button type="submit" class="btn btn-info" [disabled]="!surfaceBillOfLadingForm.valid">Get Reports</button>
+        </div>
+        </div>                    
+</form>
+</div>
+
+
+
+<hr>
+
+<div id="responseDiv" *ngIf='objWR0 != null'>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Entry Filer Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR0.entry_filer_code}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Entry Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR0.entry_number}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Error Message Identifier:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR0.error_message_identifier}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Narrative Message:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR0.narrative_message}} 
+        </div>                
+        </div>
+</div>
+
+<div id="responseDiv" *ngIf='objWSA != null'>
+
+        <div class="row new-form-row" *ngIf='objWSA.inbound_number!=null'> 
+        <div class="col-md-6 form-lable" >
+        <span >Inbound Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWSA.inbound_number}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row" *ngIf='objWSA.scac_code!=null'> 
+        <div class="col-md-6 form-lable">
+        <span >SCAC Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWSA.scac_code}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row" *ngIf='objWSA.billLading_number!=null'> 
+        <div class="col-md-6 form-lable">
+        <span >Bill Of Lading Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWSA.billLading_number}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Error Message Identifier:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWSA.error_message_identifier}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Narrative Message:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWSA.narrative_message}} 
+        </div>                
+        </div>
+</div>
+
+<div id="responseDiv" *ngIf='objWR1Master != null'>
+        
+<div id="statusWR1Div" *ngIf='objWR1Master.statusWR1 != null'>
+
+        <div class="row new-form-row" > 
+        <div class="col-md-6 form-lable">
+        <span >District/Port of Entry:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWR1.portofEntry}} 
+        </div>        
+        </div>
+
+        <div class="row new-form-row" > 
+        <div class="col-md-6 form-lable" >
+        <span >Entry Filer Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWR1.entryFilerCode}} 
+        </div>                
+        </div> 
+
+        <div class="row new-form-row" > 
+        <div class="col-md-6 form-lable">
+        <span>Entry Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWR1.entryNumber}} 
+        </div>                
+        </div>  
+                                        
+        <div class="row new-form-row" > 
+        <div class="col-md-6 form-lable">
+        <span >Entry Type Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWR1.entryTypeCode}} 
+        </div>                
+        </div> 
+                                        
+        <div class="row new-form-row" > 
+        <div class="col-md-6 form-lable">
+        <span>Importer Of Record Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWR1.importerOfRecordNumber}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row" > 
+        <div class="col-md-6 form-lable">
+        <span >Broker Reference Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWR1.brokerReferenceNumber}} 
+        </div>                
+        </div>
+                                        
+        <div class="row new-form-row" > 
+        <div class="col-md-6 form-lable">
+        <span >Carrier Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWR1.carrierCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row" > 
+        <div class="col-md-6 form-lable">
+        <span >Import Vessel Code Or Conveyance Name:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWR1.importVesselCodeOrConveyanceName}} 
+        </div>                
+        </div> 
+                                        
+        <div class="row new-form-row" > 
+        <div class="col-md-6 form-lable">
+        <span >Voyage Flight Trip Manifest Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWR1.voyageFlightTripManifestNumber}} 
+        </div>        
+        </div>
+
+        <div class="row new-form-row" > 
+        <div class="col-md-6 form-lable">
+        <span >Date of Arrival:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWR1.dateOfArrival}} 
+        </div>        
+        </div> 
+
+        
+
+</div>  
+
+<div id="statusWR2Div" *ngIf='objWR1Master.statusWR2 != null'>
+
+        <div *ngFor="let statusWR2 of objWR1Master.statusWR2">
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Trip Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR2.tripNumber}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >FIRMS:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR2.FIRMS}} 
+        </div>                
+        </div>
+
+        </div>
+</div>
+
+<div id="statusWR4Div" *ngIf='objWR1Master.statusWR4 != null'>
+
+        <div *ngFor="let statusWR4 of objWR1Master.statusWR4">
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Inbound number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR4.inbound_number}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Issuer Code of Master Bill Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR4.issuerCodeOfMasterBillNumber}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Master Bill Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR4.masterBillNumber}} 
+        </div>                
+        </div> 
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Issuer Code of House Bill Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR4.issuerCodeOfHouseBillNumber}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >House Bill Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR4.houseBillNumber}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Sub-House Bill Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR4.subHouseBillNumber}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Manifest Quantity:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR4.manifestQuantity}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Unit:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR4.unit}} 
+        </div>                
+        </div>
+
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Bill of Lading Type:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR4.billOfLadingType}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Importer Security Filing Indicator:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR4.importerSecurityFilingIndicator}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Mode of Transportation Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR4.modeOfTransportationCode}} 
+        </div>                
+        </div>
+
+        </div>
+
+</div>
+
+<div id="statusWR5Div" *ngIf='objWR1Master.statusWR5 != null'>
+                
+        <div *ngFor="let statusWR5 of objWR1Master.statusWR5">
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Disposition Action Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR5.dispositionActionDate}} 
+        </div>                
+        </div> 
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Disposition Action Time:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR5.dispositionActionTime}} 
+        </div>                
+        </div>      
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Disposition Action Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR5.dispositionActionCode}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Narrative Message:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR5.narrativeMessage}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Release Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR5.releaseDate}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Release Origin:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR5.releaseOrigin}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">
+        <span >Quantity:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR5.quantity}} 
+        </div>                
+        </div>
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Sequence:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWR5.sequence}} 
+        </div>                
+        </div>
+                                
+        </div>
+</div>
+
+<div id="statusWN0Div" *ngIf='objWR1Master.statusWN0 != null'>
+        
+        <div *ngFor="let statusWN0 of objWR1Master.statusWN0">
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >MasterBillAmendedQuantity:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWN0.masterBillAmendedQuantity}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >houseBillAmendedQuantity:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWN0.houseBillAmendedQuantity}} 
+        </div>                
+        </div>
+                                
+        </div>
+</div>
+
+<div id="statusWN1Div" *ngIf='objWR1Master.statusWN1 != null'>
+        
+        <div *ngFor="let statusWN1 of objWR1Master.statusWN1">
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Inbond Entry Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWN1.inbondEntryNumber}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span> Manifested Port of Unlading/Import:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWN1.manifestedPortOfUnladingImport}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Actual Port of Unlading/Import:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWN1.actualPortOfUnlading}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Actual Port of Unlading/Import Ocean Vessel Diversion:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWN1.actualPortOfUnlading_OceanVesselDiversion}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >In-bond Originating Port:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWN1.inbondOriginatingPort}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Manifested In-bond Destination Port:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWN1.manifestedInbondDestinationPort}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Actual In-bond Destination Manual Diversion:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWN1.actualInbondDestinationManualDiversion}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Actual In-bond Destination via EDI In-bond Diversion:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWN1.actualInbondDestination_via_EDI_InbondDiversion}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Vessel Departure Port:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWN1.vesselDeparturePort}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Vessel Departure Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWN1.vesselDepartureDate}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Container Load Port:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWN1.containerLoadPort}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Container Load Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWN1.containerLoadDate}} 
+        </div>                
+        </div>
+
+        </div>
+
+</div>
+
+<div id="statusWS4Div" *ngIf='objWR1Master.statusWS4 != null'>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >In-bond Status:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWS4.inbondStatus}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >In-bond Arrival Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWS4.inbondArrivalDate}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >In-bond Export Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWS4.inbondExportDate}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >In-bond Entry Type:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWS4.inbondEntryType}} 
+        </div>                
+        </div>
+
+</div>
+
+<div id="statusWS5Div" *ngIf='objWR1Master.statusWS5 != null'>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >In-bond Status:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWS5.inbondStatus}} 
+        </div>                
+        </div>
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >In-bond Arrival Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWS5.inbondArrivalDate}} 
+        </div>                
+        </div>
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >In-bond Export Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWS5.inbondExportDate}} 
+        </div>                
+        </div>
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >In-bond Entry Type:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWS5.inbondEntryType}} 
+        </div>                
+        </div>
+        
+</div>
+
+<div id="statusWO10Div" *ngIf='objWR1Master.statusWO10 != null'>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >District/Port of Entry:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO10.district_PortOfEntry}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Entry Filer Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO10.entryFilerCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Entry Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO10.entryNumber}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Entry Type Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO10.entryTypeCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Importer of Record Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO10.importerOfRecordNumber}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Carrier Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO10.carrierCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Vessel Name:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO10.vesselName}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Voyage Manifest Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO10.voyageManifestNumber}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Date of Arrival:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO10.dateOfArrival}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Split Shipment Release Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO10.splitShipmentReleaseCode}} 
+        </div>                
+        </div>
+
+</div>
+
+<div id="statusWO20Div" *ngIf='objWR1Master.statusWO20 != null'>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Reference Identifier Qualifier:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO10.referenceIdentifierQualifier}} 
+        </div>                
+        </div>
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Reference Identifier:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO10.referenceIdentifier}} 
+        </div>                
+        </div>
+
+</div>
+
+<div id="statusWO30Div" *ngIf='objWR1Master.statusWO30 != null'>
+        
+        <div *ngFor="let statusWO30 of objWR1Master.statusWO30">
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Line Item Identifier:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO30.lineItemIdentifier}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Country of Origin:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO30.countryOfOrigin}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >HTS Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO30.htsNumber}} 
+        </div>                
+        </div>
+               
+        </div>        
+</div>
+
+<div id="statusWO40Div" *ngIf='objWR1Master.statusWO40 != null'>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Bill Type Indicator:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO40.billTypeIndicator}} 
+        </div>                
+        </div>
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Issuer Code of Bill of Lading Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO40.scacCode}} 
+        </div>                
+        </div>
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Bill of Lading Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO40.billofLadingNumber}} 
+        </div>                
+        </div>
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Quantity:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO40.quantity}} 
+        </div>                
+        </div>
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Unit of Measure:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO40.unitOfMeasure}} 
+        </div>                
+        </div>
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Manifested Quantity:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO40.manifestedQuantity}} 
+        </div>                
+        </div>
+</div>  
+
+<div id="statusWO42Div" *ngIf='objWR1Master.statusWO42 != null'>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >In-bond Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO42.inbondNumber}} 
+        </div>                
+        </div>
+                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >In-bond Entry Type:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO42.inbondEntryType}} 
+        </div>                
+        </div>
+                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span> U.S. Port of In-bond Departure:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO42.usPortofInbondDeparture}} 
+        </div>                
+        </div>
+                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >U.S. Port of In-bond Arrival:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO42.usPortofInbondArrival}} 
+        </div>                
+        </div>
+                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Date of In-bond Departure:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO42.dateofInbondDeparture}} 
+        </div>                
+        </div>
+                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Date of In-bond Arrival:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO42.dateofInbondArrival}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >In-Bond Quantity:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{objWR1Master.statusWO42.inbondQuantity}} 
+        </div>                
+        </div>
+</div>
+
+<div id="statusWO50Div" *ngIf='objWR1Master.statusWO50 != null'>
+        
+        <div *ngFor="let statusWO50 of objWR1Master.statusWO50">
+                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Disposition Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO50.dispositionDate}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Disposition Time:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO50.dispositionTime}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span> Disposition Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO50.dispositionCode}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Narrative Message:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO50.narrativeMessage}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Split Indicator:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO50.splitIndicator}} 
+        </div>                
+        </div>
+                                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Carrier Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO50.carrierCode}} 
+        </div>                
+        </div>
+                
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Voyage Manifest Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO50.VoyageManifestNumber}} 
+        </div>                
+        </div>
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Date of Arrival:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO50.dateOfArrival}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >District/Port of Arrival:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO50.portOfArrival}} 
+        </div>                
+        </div>
+
+        </div>
+</div>
+
+<div id="statusWO60Div" *ngIf='objWR1Master.statusWO60 != null'>
+
+        <div *ngFor="let statusWO60 of objWR1Master.statusWO60">
+                        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Disposition Action Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO60.dispositionActionDate}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Disposition Action Time:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO60.dispositionActionTime}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Disposition Action Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO60.dispositionActionCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Narrative Message:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO60.narrativeMessage}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Release Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO60.releaseDate}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Release Origin:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO60.releaseOrigin}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Document Type:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO60.documentType}} 
+        </div>                
+        </div>
+
+        </div>
+</div>
+
+<div id="statusWO70Div" *ngIf='objWR1Master.statusWO70 != null'>
+
+        <div *ngFor="let statusWO70 of objWR1Master.statusWO70">
+        
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Government Agency Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.governmentAgencyCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Government Agency Program Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.governmentAgencyProgramCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Status Action Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.statusActionDate}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Status Action Time:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.statusActionTime}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Entry Level Status code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.pgaEntryLevelStatusCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Entry Level Status message:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.pgaEntryLevelStatusMessage}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Entry Line Level Status Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.entryLineLevelStatusCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Line Level Status Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.pgaLineLevelStatusCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Status Reason Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.statusReasonCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Beginning CBP line:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.beginningCBPLine}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Beginning Tariff Position:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.beginningTariffPosition}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Beginning PGA Line:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.beginningPGALine}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Ending CBP line:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.endingCBPline}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Ending Tariff Position:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.endingTariffPosition}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Ending PGA Line:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.endingPGALine}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Document Type Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.documentTypeCode}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Entry Hold:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.pgaEntryHold}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Processing Group Version:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO70.pgaProcessingGroupVersion}} 
+        </div>                
+        </div>
+
+        </div>
+</div>
+
+<div id="statusWO71Div" *ngIf='objWR1Master.statusWO71 != null'>
+
+        <div *ngFor="let statusWO71 of objWR1Master.statusWO71">
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Reference Identification Number Qualifier:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO71.pgaRefIdentNumQualifier}} 
+        </div>                
+        </div> 
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Reference Identification Number:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO71.pgaRefIdentNumber}} 
+        </div>                
+        </div> 
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Reference Identification Number Receipt Date:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO71.pgaRefIdentNumberReceiptDate}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Reference Identification Number Receipt Time:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO71.pgaReferenceIdentNumberReceiptTime}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Line Sub Reason Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO71.pgaLineSubReasonCode1}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Line Sub Reason Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO71.pgaLineSubReasonCode2}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Line Sub Reason Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO71.pgaLineSubReasonCode3}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Line Sub Reason Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO71.pgaLineSubReasonCode4}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Line Sub Reason Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO71.pgaLineSubReasonCode5}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Line Sub Reason Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO71.pgaLineSubReasonCode6}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Line Sub Reason Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO71.pgaLineSubReasonCode7}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Line Sub Reason Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO71.pgaLineSubReasonCode8}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Line Sub Reason Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO71.pgaLineSubReasonCode9}} 
+        </div>                
+        </div>
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >PGA Line Sub Reason Code:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO71.pgaLineSubReasonCode10}} 
+        </div>                
+        </div>
+
+        </div>
+</div>
+
+<div id="statusWO72Div" *ngIf='objWR1Master.statusWO72 != null'>
+
+        <div *ngFor="let statusWO72 of objWR1Master.statusWO72">
+
+        <div class="row new-form-row"> 
+        <div class="col-md-6 form-lable">               
+        <span >Comments to Trade from PGA:</span>
+        </div>
+        <div class="col-md-6 form-lable">     
+        {{statusWO72.commentsToTradefromPGA}} 
+        </div>                
+        </div>
+                
+        </div>
+</div>
+
+</div>
+    
+</div>
+
+<!-- {{manifestFormErrors |json}} -->
+
+
+

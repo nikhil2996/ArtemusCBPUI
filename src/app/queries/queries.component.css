@@ -1,0 +1,25 @@
+.tab-content{
+    border: 1px solid lightgray;
+}
+.component-container{
+    margin-top: 5%;
+    padding: 1%;
+    /* border:5px solid lightgray; */
+}
+
+.component-border-wrap {
+padding: 5px;
+position: relative;
+background: linear-gradient(to right, #007bff91, #00408559);
+}
+
+.component {
+background: white;
+padding: 2rem;
+}
+
+.component-side-border{
+    border-width: 5px;
+    border-style: solid;
+    border-image: linear-gradient( to bottom, #17a2b8, rgba(0, 0, 0, 0) ) 1 100%;
+}

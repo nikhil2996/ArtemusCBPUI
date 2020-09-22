@@ -1,0 +1,48 @@
+<div class="container" >
+        <h6 class="form-title" style="text-align: center;font-weight: bold">MID Query Form</h6> 
+
+    <form [formGroup]="midQueryForm" (ngSubmit) = "onGetReportsMidQuery()">
+
+    <div class="row new-form-row" style="margin-top: 20px;"> 
+    <div class="col-md-3 form-lable">
+    <span> MID Code:</span>
+    </div>
+    <div class="col-md-3 form-lable">
+    <input name="midCode" type="text" id="midCode" formControlName="midCode" maxlength="15" class="form-control form-control-sm" 
+    title= " Enter MID Number ">    
+    </div>           
+    </div>
+    <div class="row new-form-row">
+    <div class="form-group">
+        <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" formControlName="fromDate"  
+                name="fromDate"  ngbDatepicker #d="ngbDatepicker" >
+            <div class="input-group-append">
+            <button class="btn btn-outline-secondary " (click)="d.toggle()" type="button">
+                <i class="fa fa-calendar" aria-hidden="true"></i>   
+            </button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="row new-form-row">
+        <div class="col-md-10">
+        </div>
+        <div class="col-md-2">
+        <button type="submit" class="btn btn-info" (click)="midQueryButton()">Get Reports</button>
+        </div>
+        </div> 
+        
+
+    <div class="row new-form-row">
+    <div class="col-md-10">
+    </div>
+    <div class="col-md-2">
+    <button type="submit" class="btn btn-info" [disabled]="!midQueryForm.valid">Get Reports</button>
+    </div>
+    </div> 
+    </form>
+    
+
+</div>

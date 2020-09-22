@@ -1,0 +1,49 @@
+<div class="container" >
+    <h6 class="form-title" style="text-align: center;font-weight: bold">Test EDI Screen</h6>
+
+    <form [formGroup]="testEdiForm" (ngSubmit) = "onGetTestEdi()">
+    
+    <div class="row new-form-row"> 
+    <div class="col-md-3 form-lable">
+    <span >Test EDI Message:</span>           
+    </div>
+    <div class="col-md-3 form-lable"> 
+    <input type="text" id="input_json" name="input_json" title="Enter the test EDI message" class="form-control form-control-sm" formControlName="input_json">
+    </div>
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-3 form-lable">
+    <span >Transimittor Text:</span>           
+    </div>
+    <div class="col-md-3 form-lable"> 
+    <input type="text" id="users_transmitter_text" name="users_transmitter_text" title="Enter the test EDI message" maxlength="21" class="form-control form-control-sm" formControlName="users_transmitter_text">
+    </div>
+    </div>
+
+    <div class="row new-form-row">
+    <div class="col-md-10">
+    </div>
+    <div class="col-md-2">
+    <button type="submit" class="btn btn-info" [disabled]="!testEdiForm.valid">Get Reports</button>
+    </div>
+    </div>
+
+
+    </form>   
+    
+    <hr>
+    
+    <div class="row new-form-row" > 
+    <div class="col-md-3 form-lable">
+    <span >Response EDI Message:</span>           
+    </div>
+    <div class="col-md-9 form-lable">
+    <pre>     
+    {{outputEDI}}
+    </pre>
+    </div>
+    </div>
+    
+
+</div>    

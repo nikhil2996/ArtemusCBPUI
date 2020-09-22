@@ -1,0 +1,3070 @@
+<div class="container" >
+    <h6 class="form-title" style="text-align: center;font-weight: bold">Query List</h6> 
+    
+    <div class="row new-form-row" style="margin-top: 20px;">
+    <div  class="col-md-3 form-lable" data-toggle="collapse" (click)="resetResponseaAndForm();" data-target="#Tariffdiv"><span>Tariff Query</span> </div>
+    <div class="col-md-3 form-lable"></div>
+    </div> 
+
+    <div style="margin-left: 200px;" id="Tariffdiv" class="collapse">
+        <div id="formDiv" class="animated fadeIn">
+        <form [formGroup]="tariffForm" (ngSubmit) = "onGetReportsTariffQuery()">
+            <div class="row new-form-row"> 
+            <div class="col-md-3 form-lable">
+            <span >HTSUS:</span>           
+            </div>
+            <div class="col-md-3 form-lable"> 
+            <input type="text" id="HTSUSNo" name="HTSUSNo" title="Enter the HTSUS Number"  maxlength="10"
+            class="form-control form-control-sm" formControlName="HTSUSNo">
+            </div>
+            </div>  
+          <!--   <div class="row new-form-row">
+            <div class="col-md-3 form-lable">
+            <span>Description:</span>        
+            </div>
+            <div class="col-md-3 form-lable"> 
+            <input type="text" id="Description" name="Description" title="Enter the Description"  
+            class="form-control form-control-sm" formControlName="Description"> </div>        
+            </div>  -->
+            <div class="row new-form-row">
+            <div class="col-md-3 form-lable">
+            <span>As of Date/Entry Date:</span>        
+            </div>
+            <div class="col-md-3 form-lable"> 
+            <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" formControlName="fromDate"  
+            name="fromDate"  ngbDatepicker #d="ngbDatepicker" >
+            <div class="input-group-append">
+            <button class="btn btn-outline-secondary " (click)="d.toggle()" type="button">
+            <i class="fa fa-calendar" aria-hidden="true"></i>   
+            </button>
+            </div>
+            </div>         
+            </div>
+            </div> 
+            <div class="row new-form-row">
+            <div class="col-md-2 " style="padding-left: inherit;">
+            <button type="submit"  style=" font-size: medium;" class="btn btn-link" [disabled]="!tariffForm.valid">Get Reports</button>    
+            </div>
+            <!-- <div class="col-md-3 " style="padding-left: inherit;">
+            <button type="button"  (click)="onGetReportsTariffQueryCBP()" style=" font-size: medium;" class="btn btn-link " [disabled]="!tariffForm.valid">Get Report from CBP</button>    
+            </div> -->
+            <div class="col-md-5">
+            <button type="button" (click)="onGetReportsTariffQueryHarmonized()" style=" font-size: medium;" class="btn btn-link" >USA Harmonized Tariff Schedule </button> 
+            </div>
+            </div>            
+
+        </form>         
+        </div>
+    </div>     
+    
+    <div class="row new-form-row" style="margin-top: 20px;">
+        <div  class="col-md-3 form-lable" data-toggle="collapse" (click)="resetResponseaAndForm();" data-target="#Scacdiv"><span>SCAC Code</span> </div>
+        <div class="col-md-3 form-lable"></div>
+    </div> 
+
+    <div style="margin-left: 200px;" id="Scacdiv" class="collapse">
+            <div id="Scacdiv" class="animated fadeIn">
+            <form [formGroup]="scacCodeForm"  (ngSubmit) = "onGetReportsScacQuery()">
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >SCAC Code:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="scacCode" name="scacCode" title="Enter the Scac Code"  minlength="4" maxlength="4"
+                class="form-control form-control-sm"  formControlName="scacCode" >
+                </div>
+                </div>
+                <div class="row new-form-row">
+                <div class="col-md-4 " style="padding-left: inherit;">
+                <button type="submit"  class="btn btn-link" style=" font-size: medium;" [disabled]="!scacCodeForm.valid">Get SCAC Code From CBP</button>    
+                </div>
+                <div class="col-md-3">
+                </div>
+                </div>                 
+            </form>         
+            </div>
+    </div> 
+    
+    
+    <div class="row new-form-row" style="margin-top: 20px;">
+        <div  class="col-md-3 form-lable" data-toggle="collapse" (click)="resetResponseaAndForm();" data-target="#Firmsdiv"><span>Firms Code Query </span> </div>
+        <div class="col-md-3 form-lable"></div>
+    </div> 
+
+
+    <div style="margin-left: 200px;" id="Firmsdiv" class="collapse">
+        <div id="firmsCodediv" class="animated fadeIn">
+        
+
+            <div class="row new-form-row" style="margin-top: 20px;">
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+            <select class="form-control form-control-sm" [(ngModel)]="queryStatus" (change)="formsReset()">
+            <option *ngFor="let queryStatus of firmQueriesList" [ngValue]="queryStatus.code">{{ queryStatus.text }}</option>
+            </select>
+            </div>
+            </div>
+        
+            <div id="formDiv" class="animated fadeIn"   *ngIf="queryStatus=='1'">
+
+            <form [formGroup]="firmsQueryFormForCode"  (ngSubmit) = "onGetReportsFirmsQueryForCode()">
+
+            <div class="row new-form-row"> 
+            <div class="col-md-3 form-lable">
+            <span >Firms Code:</span>           
+            </div>
+            <div class="col-md-3 form-lable"> 
+            <input type="text" id="firmsCode" name="firmsCode" title="A Facilities Information and Resources Management System (FIRMS) code representing the location of goods."  
+            class="form-control form-control-sm" maxlength="4" formControlName="firmsCode">
+            </div>
+            </div> 
+
+            <div class="row new-form-row">
+            <div class="col-md-4 " style="padding-left: inherit;">
+            <button type="submit"  class="btn btn-link" style=" font-size: medium;" [disabled]="!firmsQueryFormForCode.valid">Get Firms Code From CBP</button>    
+            </div>
+            <div class="col-md-3">
+            </div>
+            </div> 
+
+            </form> 
+            </div>
+
+            <div id="formDiv" class="animated fadeIn"   *ngIf="queryStatus=='2'">
+
+            <form [formGroup]="firmsQueryFormForFacility"  (ngSubmit) = "onGetReportsFirmsQueryForFacility()">
+
+            <div class="row new-form-row"> 
+            <div class="col-md-3 form-lable">
+            <span >Name of Facility:</span>           
+            </div>
+            <div class="col-md-3 form-lable"> 
+            <input type="text" id="facilityName" name="facilityName" title="The name of the facility where the goods are
+            located."  class="form-control form-control-sm" maxlength="35" formControlName="facilityName">
+            </div>
+            </div>
+            <div class="row new-form-row"> 
+            <div class="col-md-3 form-lable">
+            <span >District Code:</span>           
+            </div>
+            <div class="col-md-3 form-lable"> 
+            <input type="text" id="districtCode" name="districtCode" title="The district code is the first two numbers of
+            the district/port code."  maxlength="2" class="form-control form-control-sm" formControlName="districtCode">
+            </div>
+            </div> 
+            
+            <div class="row new-form-row">
+            <div class="col-md-4 " style="padding-left: inherit;">
+            <button type="submit"  class="btn btn-link" style=" font-size: medium;" [disabled]="!firmsQueryFormForFacility.valid">Get Firms Code From CBP</button>    
+            </div>
+            <div class="col-md-3">
+            </div>
+            </div>
+
+            </form>
+
+            </div>
+
+            <div id="formDiv" class="animated fadeIn"   *ngIf="queryStatus=='3'">
+
+            <form [formGroup]="firmsQueryFormForDistrictCode"  (ngSubmit) = "onGetReportsFirmsQueryForDistrict()">    
+            
+            <div class="row new-form-row"> 
+            <div class="col-md-3 form-lable">
+            <span >District Code:</span>           
+            </div>
+            <div class="col-md-3 form-lable"> 
+            <input type="text" id="districtCode" name="districtCode" title="The district code is the first two numbers of
+            the district/port code."  maxlength="2" class="form-control form-control-sm" formControlName="districtCode">
+            </div>
+            </div>  
+            
+            <div class="row new-form-row">
+            <div class="col-md-3 form-lable">
+            <span>Begin Date:</span>        
+            </div>
+            <div class="col-md-3 form-lable"> 
+            <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" formControlName="beginDate"  
+            name="beginDate"  ngbDatepicker #d="ngbDatepicker" >
+            <div class="input-group-append">
+            <button class="btn btn-outline-secondary " (click)="d.toggle()" type="button">
+            <i class="fa fa-calendar" aria-hidden="true"></i>   
+            </button>
+            </div>
+            </div>         
+            </div>
+            </div>
+
+            <div class="row new-form-row">
+            <div class="col-md-4 " style="padding-left: inherit;">
+            <button type="submit"  class="btn btn-link" style=" font-size: medium;" [disabled]="!firmsQueryFormForDistrictCode.valid">Get Firms Code From CBP</button>    
+            </div>
+            <div class="col-md-3">
+            </div>
+            </div>
+
+            </form>
+
+            </div>
+         
+        </div>
+    </div>
+
+
+    <div class="row new-form-row" style="margin-top: 20px;">
+        <div  class="col-md-3 form-lable" data-toggle="collapse" (click)="resetResponseaAndForm();" data-target="#ExchangeRatediv"><span>Exchange Rate Query  </span> </div>
+        <div class="col-md-3 form-lable"></div>
+    </div>
+
+
+    <div style="margin-left: 200px;" id="ExchangeRatediv" class="collapse">
+            <div id="ExchangeRatediv" class="animated fadeIn">
+            <form [formGroup]="exchangeRateForm"  (ngSubmit) = "onGetReportsExchangeRateQuery()">
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >Currency Code:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="currencyCode" name="currencyCode" title="Enter the Currency Code"  
+                class="form-control form-control-sm" formControlName="currencyCode">
+                </div>
+                </div>
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >Exchange Rate Date:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="date" name="date" title="Enter the Exchange Rate Date"  
+                class="form-control form-control-sm" formControlName="date">
+                </div>
+                </div>
+    
+                <div class="row new-form-row">
+                <div class="col-md-3 " style="padding-left: inherit;">
+                <button type="submit"  class="btn btn-link" style=" font-size: medium;" [disabled]="!exchangeRateForm.valid">Get Exchange Rates</button>    
+                </div>
+                <div class="col-md-3">
+                </div>
+                </div>                 
+            </form>         
+            </div>
+        </div>
+
+        
+    <div class="row new-form-row" style="margin-top: 20px;">
+        <div  class="col-md-3 form-lable" data-toggle="collapse" (click)="resetResponseaAndForm();" data-target="#ADCVDdiv"><span>Antidumping / Countervailing duty Form </span> </div>
+        <div class="col-md-3 form-lable"></div>
+    </div>
+        
+    <div style="margin-left: 200px;" id="ADCVDdiv" class="collapse">
+        <div id="ADCVDdiv" class="animated fadeIn">
+
+        
+
+        <div class="row new-form-row"> 
+        <div class="col-md-3 form-lable">
+        <span >Case Query Criteria:</span>           
+        </div>  
+        <div class="col-md-3">
+        <select class="form-control form-control-sm" [(ngModel)]="caseQueryCriteria" (change)="formsReset()">
+        <option *ngFor="let caseQueryCriteria of caseQueryCriteriaList" [ngValue]="caseQueryCriteria.code">{{ caseQueryCriteria.text }}</option>
+        </select>
+        </div>
+
+        </div>
+
+        <div id="formDiv" class="animated fadeIn"   *ngIf="caseQueryCriteria=='space'">
+        <form [formGroup]="ADCVDFormForCaseNumber" (ngSubmit) = "onGetReportsADCVD()">
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >Case Number:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="caseNumber" name="caseNumber" title="Enter the Case Number"  
+                class="form-control form-control-sm" formControlName="caseNumber">
+                </div>
+                </div>
+
+                <div class="row new-form-row">
+                <div class="col-md-2 " style="padding-left: inherit;">
+                <button type="submit"  class="btn btn-link" style=" font-size: medium;"  [disabled]="!ADCVDFormForCaseNumber.valid">Get Report </button>    
+                </div>
+
+                <div class="col-md-3">
+                <button type="submit"  class="btn btn-link" (click)="onGetReportsADCVDSearch()" style=" font-size: medium;"> ADD CVD Search</button>        
+                </div>
+                </div>  
+        </form>
+        </div>
+
+        <div id="formDiv" class="animated fadeIn"   *ngIf="caseQueryCriteria=='A'">
+
+        <form [formGroup]="ADCVDFormForActive" (ngSubmit) = "onGetReportsADCVDForActive()">
+
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >Tariff Number:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="tariffNumber" name="tariffNumber" title="A valid 8- or 10-digit tariff number located
+                in the Harmonized Tariff Schedule of the United States " class="form-control form-control-sm"
+                formControlName="tariffNumber">
+                </div>
+                </div>
+
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >ISO Country Code:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="countryCode" name="countryCode" title="The 2 character alphabetic ISO country
+                code of the AD/CVD case. "  class="form-control form-control-sm" formControlName="countryCode">
+                </div>
+                </div>
+
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >TSUSA Number:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="tsusaNumber" name="tsusaNumber" title="A valid 5- or 7-digit tariff number located
+                in the Tariff Schedule of the United States Annotated (TSUSA) (the commodity classification system in use in the United
+                States prior to January 1, 1989)."  class="form-control form-control-sm" formControlName="tsusaNumber">
+                </div>
+                </div>
+
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >MID Code:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="midCode" name="midCode" title="A Manufacturer Identification Code (MID)
+                for a foreign manufacturer as assigned to one or more AD/CVD cases." class="form-control form-control-sm" 
+                formControlName="midCode">
+                </div>
+                </div>
+
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >Foreign Exporterd ID Code:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="foreignExporterIdentificationCode" name="foreignExporterIdentificationCode" 
+                title="An identification code for a foreign exporter as assigned to one or more AD/CVD cases." 
+                class="form-control form-control-sm" formControlName="foreignExporterIdentificationCode">
+                </div>
+                </div>
+
+                <div class="row new-form-row">
+                <div class="col-md-3 form-lable">
+                <span>Date since Last Updated:</span>        
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" formControlName="lastDate"  
+                name="lastDate"  ngbDatepicker #d="ngbDatepicker" >
+                <div class="input-group-append">
+                <button class="btn btn-outline-secondary " (click)="d.toggle()" type="button">
+                <i class="fa fa-calendar" aria-hidden="true"></i>   
+                </button>
+                </div>
+                </div>         
+                </div>
+                </div>
+
+                <div class="row new-form-row">
+                <div class="col-md-2 " style="padding-left: inherit;">
+                <button type="submit"  class="btn btn-link" style=" font-size: medium;"  [disabled]="!ADCVDFormForActive.valid">Get Report </button>    
+                </div>
+                <div class="col-md-3">
+                <button type="submit"  class="btn btn-link" (click)="onGetReportsADCVDSearch()" style=" font-size: medium;"> ADD CVD Search</button>        
+                </div>
+                </div>  
+        </form>
+
+        </div>
+
+        <div id="formDiv" class="animated fadeIn"   *ngIf="caseQueryCriteria=='I'">
+
+        <form [formGroup]="ADCVDFormForInactive" (ngSubmit) = "onGetReportsADCVDForInactive()">
+            
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >Tariff Number:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="tariffNumber" name="tariffNumber" title="A valid 8- or 10-digit tariff number located
+                in the Harmonized Tariff Schedule of the United States " class="form-control form-control-sm"
+                formControlName="tariffNumber">
+                </div>
+                </div>
+
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >ISO Country Code:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="countryCode" name="countryCode" title="The 2 character alphabetic ISO country
+                code of the AD/CVD case. "  class="form-control form-control-sm" formControlName="countryCode">
+                </div>
+                </div>
+
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >TSUSA Number:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="tsusaNumber" name="tsusaNumber" title="A valid 5- or 7-digit tariff number located
+                in the Tariff Schedule of the United States Annotated (TSUSA) (the commodity classification system in use in the United
+                States prior to January 1, 1989)."  class="form-control form-control-sm" formControlName="tsusaNumber">
+                </div>
+                </div>
+
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >MID Code:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="midCode" name="midCode" title="A Manufacturer Identification Code (MID)
+                for a foreign manufacturer as assigned to one or more AD/CVD cases." class="form-control form-control-sm" 
+                formControlName="midCode">
+                </div>
+                </div>
+
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >Foreign Exporterd ID Code:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="foreignExporterIdentificationCode" name="foreignExporterIdentificationCode" 
+                title="An identification code for a foreign exporter as assigned to one or more AD/CVD cases." 
+                class="form-control form-control-sm" formControlName="foreignExporterIdentificationCode">
+                </div>
+                </div>
+
+                <div class="row new-form-row">
+                <div class="col-md-3 form-lable">
+                <span>Date since Last Updated:</span>        
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" formControlName="lastDate"  
+                name="lastDate"  ngbDatepicker #d="ngbDatepicker" >
+                <div class="input-group-append">
+                <button class="btn btn-outline-secondary " (click)="d.toggle()" type="button">
+                <i class="fa fa-calendar" aria-hidden="true"></i>   
+                </button>
+                </div>
+                </div>         
+                </div>
+                </div>
+
+                <div class="row new-form-row">
+                <div class="col-md-2 " style="padding-left: inherit;">
+                <button type="submit"  class="btn btn-link" style=" font-size: medium;"  [disabled]="!ADCVDFormForInactive.valid">Get Report </button>    
+                </div>
+                <div class="col-md-3">
+                <button type="submit"  class="btn btn-link" (click)="onGetReportsADCVDSearch()" style=" font-size: medium;"> ADD CVD Search</button>        
+                </div>
+                </div>  
+        </form>
+        </div>
+
+        <div id="formDiv" class="animated fadeIn"   *ngIf="caseQueryCriteria=='B'">
+
+        <form [formGroup]="ADCVDFormForBoth" (ngSubmit) = "onGetReportsADCVDForBoth()">
+
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >Tariff Number:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="tariffNumber" name="tariffNumber" title="A valid 8- or 10-digit tariff number located
+                in the Harmonized Tariff Schedule of the United States " class="form-control form-control-sm"
+                formControlName="tariffNumber">
+                </div>
+                </div>
+
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >ISO Country Code:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="countryCode" name="countryCode" title="The 2 character alphabetic ISO country
+                code of the AD/CVD case. "  class="form-control form-control-sm" formControlName="countryCode">
+                </div>
+                </div>
+
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >TSUSA Number:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="tsusaNumber" name="tsusaNumber" title="A valid 5- or 7-digit tariff number located
+                in the Tariff Schedule of the United States Annotated (TSUSA) (the commodity classification system in use in the United
+                States prior to January 1, 1989)."  class="form-control form-control-sm" formControlName="tsusaNumber">
+                </div>
+                </div>
+
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >MID Code:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="midCode" name="midCode" title="A Manufacturer Identification Code (MID)
+                for a foreign manufacturer as assigned to one or more AD/CVD cases." class="form-control form-control-sm" 
+                formControlName="midCode">
+                </div>
+                </div>
+
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >Foreign Exporterd ID Code:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="foreignExporterIdentificationCode" name="foreignExporterIdentificationCode" 
+                title="An identification code for a foreign exporter as assigned to one or more AD/CVD cases." 
+                class="form-control form-control-sm" formControlName="foreignExporterIdentificationCode">
+                </div>
+                </div>
+
+                <div class="row new-form-row">
+                <div class="col-md-3 form-lable">
+                <span>Date since Last Updated:</span>        
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" formControlName="lastDate"  
+                name="lastDate"  ngbDatepicker #d="ngbDatepicker" >
+                <div class="input-group-append">
+                <button class="btn btn-outline-secondary " (click)="d.toggle()" type="button">
+                <i class="fa fa-calendar" aria-hidden="true"></i>   
+                </button>
+                </div>
+                </div>         
+                </div>
+                </div>
+
+                <div class="row new-form-row">
+                <div class="col-md-2 " style="padding-left: inherit;">
+                <button type="submit"  class="btn btn-link" style=" font-size: medium;"  [disabled]="!ADCVDFormForBoth.valid">Get Report </button>    
+                </div>
+                <div class="col-md-3">
+                <button type="submit"  class="btn btn-link" (click)="onGetReportsADCVDSearch()" style=" font-size: medium;"> ADD CVD Search</button>        
+                </div>
+                </div>  
+        </form>
+
+        </div>
+            
+                               
+               
+    </div>
+    </div>
+
+    <div class="row new-form-row" style="margin-top: 20px;">
+        <div  class="col-md-3 form-lable" data-toggle="collapse" (click)="resetResponseaAndForm();" data-target="#QuotaQuerydiv"><span>Quota Query</span> </div>
+        <div class="col-md-3 form-lable"></div>
+    </div>
+
+
+    <div style="margin-left: 200px;" id="QuotaQuerydiv" class="collapse">
+            <div id="QuotaQuerydiv" class="animated fadeIn">
+            <form [formGroup]="quoteQueryForm"  (ngSubmit) = "onGetReportsQuotaQuery()">
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >Tariff/Quota/Visa 1:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="TariffQuotaVisaNum1" name="TariffQuotaVisaNum1"   
+                class="form-control form-control-sm" formControlName="TariffQuotaVisaNum1">
+                </div>
+                </div>
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >Tariff/Quota/Visa  2:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="TariffQuotaVisaNum2" name="TariffQuotaVisaNum2"   
+                class="form-control form-control-sm" formControlName="TariffQuotaVisaNum2">
+                </div>
+                </div>
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >Country of Origin:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <input type="text" id="countryofOrigin" name="countryofOrigin"   
+                class="form-control form-control-sm" formControlName="countryofOrigin">
+                </div>
+                </div>
+                <div class="row new-form-row"> 
+                <div class="col-md-3 form-lable">
+                <span >Visa Query Indicator:</span>           
+                </div>
+                <div class="col-md-3 form-lable"> 
+                <select class="form-control form-control-sm" id="visaQueryCriteria" 
+                name="visaQueryCriteria" formControlName="visaQueryCriteria">
+                <option *ngFor="let visaQueryCriteria of visaQueryCriteriaList" [ngValue]="visaQueryCriteria.code">{{ visaQueryCriteria.text }}</option>
+                </select> 
+                </div>
+                </div>
+    
+                <div class="row new-form-row">
+                <div class="col-md-4 " style="padding-left: inherit;">
+                <button type="submit"  class="btn btn-link" style=" font-size: medium;" [disabled]="!quoteQueryForm.valid">Query Quota Information</button>    
+                </div>
+                <div class="col-md-3">
+                </div>
+                </div>                 
+            </form>         
+            </div>
+        </div>
+
+<hr>
+    
+    <div id="TariffresponseDiv" *ngIf='objTariffQueryMaster'>
+
+    <div id="W0responseDiv" *ngIf='objTariffQueryMaster.w0'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span >From Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w0.fromTariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span >As Of Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w0.asOfDate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span >To Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w0.toTariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span >Narrative Message:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w0.narrativeMessage}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="W1responseDiv" *ngIf='objTariffQueryMaster.w1'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span >Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w1.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span >Record Begin Effective Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w1.recordBeginEffectiveDate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span >Record End Effective Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w1.recordEndEffectiveDate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span >Number of Reporting Units:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w1.numberOfReportingUnits}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span >Unit 1:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w1.unit1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span >Unit 2:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w1.unit2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span >Unit 3:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w1.unit3}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span >Duty Computation Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w1.dutyComputationCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span >Commodity Description:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w1.commodityDescription}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span >Column 1 Specific Rate:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w1.column1SpecificRate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Base Rate Indicator:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w1.baseRateIndicator}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="W2responseDiv" *ngIf='objTariffQueryMaster.w2'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w2.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Column 1 Rate, Ad Valorem:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w2.column1RateAdValorem}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Column 1 Rate, Other:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w2.column1RateOther}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Column 2 Rate,Specific:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w2.column2RateSpecific}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Column 2 Rate, Ad Valorem:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w2.column2RateAdValorem}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Column 2 Rate, Other:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w2.column2RateOther}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Countervailing Duty Flag:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w2.countervailingDutyFlag}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Additional Tariff Number Indicator:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w2.additionalTariffNumberIndicator}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Miscellaneous Permit/License Indicator:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w2.miscellaneousPermit_LicenseIndicator}} 
+    </div>                
+    </div>
+
+    </div> 
+
+    <div id="W3responseDiv" *ngIf='objTariffQueryMaster.w3'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w3.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Generalized System of Preferences (GSP) Excluded Countries:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w3.generalizedSystemOfPreferencesExcludedCountries}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Antidumping Duty Flag:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w3.antidumpingDutyFlag}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Quota Indicator:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w3.quotaIndicator}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Category Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w3.categoryNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Special Program Indicator (SPI) Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w3.specialProgramIndicatorCode}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="W4responseDiv" *ngIf='objTariffQueryMaster.w4'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w4.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Value Edit Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w4.valueEditCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Value Low Bounds:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w4.valueLowBounds}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Value High Bounds:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w4.valueHighBounds}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Entry Date Restriction Code 1:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w4.entryDateRestrictionCode1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Begin Restriction Date 1:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w4.beginRestrictionDate1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>End Restriction Date 1:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w4.endRestrictionDate1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Entry Date Restriction Code 2:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w4.entryDateRestrictionCode2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Begin Restriction Date 2:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w4.beginRestrictionDate2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>End Restriction Date 2:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w4.endRestrictionDate2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>ISO Country of Origin Edit Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w4.ISOCountryOfOriginEditCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Quantity Edit Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w4.quantityEditCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Quantity Edit Low Bounds:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w4.quantityEditLowBounds}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Quantity Edit High Bounds:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w4.quantityEditHighBounds}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="W5responseDiv" *ngIf='objTariffQueryMaster.w5'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w5.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>International Organization for Standardization (ISO) Country Code 1:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w5.internationalOrganizationforStandardizationCountryCode1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 1:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w5.specificSpecialRate1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 1:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w5.specificSpecialRate1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Special Rate 1:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w5.otherSpecialRate1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Class Code 1:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w5.Tax_FeeClassCode1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Computation Code 1:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w5.Tax_FeeComputationCode1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Flag 1:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w5.Tax_FeeFlag1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Specific Rate 1:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w5.Tax_FeeSpecificRate1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Ad Valorem 1:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w5.Tax_FeeAdValorem1}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="W6responseDiv" *ngIf='objTariffQueryMaster.w6'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w6.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>International Organization for Standardization (ISO) Country Code 2:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w6.internationalOrganizationforStandardizationCountryCode2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 2:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w6.specificSpecialRate2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ad Valorem Special Rate 2:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w6.adValoremSpecialRate2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Special Rate 2:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w6.otherSpecialRate2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Class Code 2:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w6.tax_FeeClassCode2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Computation Code 2:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w6.tax_FeeComputationCode2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Flag 2:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w6.tax_FeeFlag2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Specific Rate 2:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w6.tax_FeeSpecificRate2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Ad Valorem 2:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w6.tax_FeeAdValorem2}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="W7responseDiv" *ngIf='objTariffQueryMaster.w7'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w7.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>International Organization for Standardization (ISO) Country Code 3:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w7.internationalOrganizationForStandardizationCountryCode3}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 3:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w7.specificSpecialRate3}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ad Valorem Special Rate 3:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w7.adValoremSpecialRate3}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Special Rate 3:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w7.otherSpecialRate3}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Class Code 3:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w7.tax_FeeClassCode3}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Computation Code 3:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w7.tax_FeeComputationCode3}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Flag 3:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w7.tax_FeeFlag3}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Specific Rate 3:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w7.tax_FeeSpecificRate3}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Ad Valorem 3:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w7.tax_FeeAdValorem3}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="W8responseDiv" *ngIf='objTariffQueryMaster.w8'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w8.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>International Organization for Standardization (ISO) Country Code 4:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w8.internationalOrganizationForStandardizationCountryCode4}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 4:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w8.specificSpecialRate4}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ad Valorem Special Rate 4:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w8.adValoremSpecialRate4}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Special Rate 4:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w8.otherSpecialRate4}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Class Code 4:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w8.tax_FeeClassCode4}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Computation Code 4:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w8.tax_FeeComputationCode4}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Flag 4:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w8.tax_FeeFlag4}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Specific Rate 4:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w8.tax_FeeSpecificRate4}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Ad Valorem 4:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w8.tax_FeeAdValorem4}} 
+    </div>                
+    </div>
+    
+    </div>
+
+    <div id="W9responseDiv" *ngIf='objTariffQueryMaster.w9'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w9.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>International Organization for Standardization (ISO) Country Code 5:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w9.internationalOrganizationForStandardizationCountryCode5}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 5:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w9.specificSpecialRate5}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ad Valorem Special Rate 5:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w9.adValoremSpecialRate5}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Special Rate 5:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w9.otherSpecialRate5}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Class Code 5:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w9.tax_FeeClassCode5}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Computation Code 5:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w9.tax_FeeComputationCode5}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Flag 5:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w9.tax_FeeFlag5}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Specific Rate 5:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w9.tax_FeeSpecificRate5}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Ad Valorem 5:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.w9.tax_FeeAdValorem5}} 
+    </div>                
+    </div>
+    
+    </div>
+
+    <div id="WAresponseDiv" *ngIf='objTariffQueryMaster.wA'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wA.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>International Organization for Standardization (ISO) Country Code 6:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wA.internationalOrganizationForStandardizationCountryCode6}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 6:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wA.specificSpecialRate6}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ad Valorem Special Rate 6:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wA.adValoremSpecialRate6}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Special Rate 6:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wA.otherSpecialRate6}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Class Code 6:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wA.tax_FeeClassCode6}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Computation Code 6:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wA.tax_FeeComputationCode6}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Flag 6:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wA.tax_FeeFlag6}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Specific Rate 6:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wA.tax_FeeSpecificRate6}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Ad Valorem 6:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wA.tax_FeeAdValorem6}} 
+    </div>                
+    </div>
+    
+    </div>
+
+    <div id="WBresponseDiv" *ngIf='objTariffQueryMaster.wB'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wB.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>International Organization for Standardization (ISO) Country Code 7:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wB.internationalOrganizationForStandardizationCountryCode7}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 7:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wB.specificSpecialRate7}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ad Valorem Special Rate 7:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wB.adValoremSpecialRate7}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Special Rate 7:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wB.otherSpecialRate7}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Class Code 7:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wB.tax_FeeClassCode7}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Computation Code 7:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wB.tax_FeeComputationCode7}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Flag 7:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wB.tax_FeeFlag7}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Specific Rate 7:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wB.tax_FeeSpecificRate7}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Ad Valorem 7:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wB.tax_FeeAdValorem7}} 
+    </div>                
+    </div>
+    
+    </div>
+
+    <div id="WCresponseDiv" *ngIf='objTariffQueryMaster.wC'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wC.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>International Organization for Standardization (ISO) Country Code 8:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wC.internationalOrganizationForStandardizationCountryCode8}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 8:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wC.specificSpecialRate8}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ad Valorem Special Rate 8:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wC.adValoremSpecialRate8}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Special Rate 8:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wC.otherSpecialRate8}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Class Code 8:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wC.tax_FeeClassCode8}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Computation Code 8:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wC.tax_FeeComputationCode8}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Flag 8:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wC.tax_FeeFlag8}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Specific Rate 8:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wC.tax_FeeSpecificRate8}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tax/Fee Ad Valorem 8:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wC.tax_FeeAdValorem8}} 
+    </div>                
+    </div>
+    
+    </div>
+
+    <div id="WDresponseDiv" *ngIf='objTariffQueryMaster.wD'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wD.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Special Programs Indicator (SPI) Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wD.specialProgramsIndicatorCode}} 
+    </div>                
+    </div>
+    
+    </div>
+
+    <div id="WEresponseDiv" *ngIf='objTariffQueryMaster.wE'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wE.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>International Organization for Standardization (ISO) Country Code 9:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wE.internationalOrganizationForStandardizationCountryCode9}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 9:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wE.specificSpecialRate9}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ad Valorem Special Rate 9:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wE.adValoremSpecialRate9}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Special Rate 9:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wE.otherSpecialRate9}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="WFresponseDiv" *ngIf='objTariffQueryMaster.wF'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wF.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>International Organization for Standardization (ISO) Country Code 10:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wF.internationalOrganizationForStandardizationCountryCode10}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 10:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wF.specificSpecialRate10}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ad Valorem Special Rate 10:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wF.adValoremSpecialRate10}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Special Rate 10:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wF.otherSpecialRate10}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="WGresponseDiv" *ngIf='objTariffQueryMaster.wG'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wG.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>International Organization for Standardization (ISO) Country Code 11:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wG.internationalOrganizationForStandardizationCountryCode11}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 11:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wG.specificSpecialRate11}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ad Valorem Special Rate 11:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wG.adValoremSpecialRate11}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Special Rate 11:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wG.otherSpecialRate11}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="WHresponseDiv" *ngIf='objTariffQueryMaster.wH'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wH.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>International Organization for Standardization (ISO) Country Code 12:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wH.internationalOrganizationForStandardizationCountryCode12}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 12:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wH.specificSpecialRate12}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ad Valorem Special Rate 12:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wH.adValoremSpecialRate12}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Special Rate 12:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wH.otherSpecialRate12}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="WIresponseDiv" *ngIf='objTariffQueryMaster.wI'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wI.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>International Organization for Standardization (ISO) Country Code 13:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wI.internationalOrganizationForStandardizationCountryCode13}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 13:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wI.specificSpecialRate13}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ad Valorem Special Rate 13:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wI.adValoremSpecialRate13}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Special Rate 13:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wI.otherSpecialRate13}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="WJresponseDiv" *ngIf='objTariffQueryMaster.wJ'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wJ.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>International Organization for Standardization (ISO) Country Code 14:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wJ.internationalOrganizationForStandardizationCountryCode14}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 14:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wJ.specificSpecialRate14}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ad Valorem Special Rate 14:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wJ.adValoremSpecialRate14}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Special Rate 14:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wJ.otherSpecialRate14}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="WKresponseDiv" *ngIf='objTariffQueryMaster.wK'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wK.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>International Organization for Standardization (ISO) Country Code 15:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wK.internationalOrganizationForStandardizationCountryCode15}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Special Rate 15:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wK.specificSpecialRate15}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ad Valorem Special Rate 15:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wK.adValoremSpecialRate15}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Special Rate 15:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wK.otherSpecialRate15}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="WLresponseDiv" *ngIf='objTariffQueryMaster.wL'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wL.tariffNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Participating Government Agencies:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objTariffQueryMaster.wL.participatingGovernmentAgencies}} 
+    </div>                
+    </div>
+
+    </div>
+
+    </div>
+
+    <div id="SCACresponseDiv" *ngIf='objScacQueryResponse'>
+
+    <div id="responseDiv" *ngFor='let scac of objScacQueryResponse; let i = index'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Carrier Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">    
+    {{scac.carrierCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Carrier Name:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{scac.carrierName}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Carrier Mode of Transportation:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{scac.carrierModeOfTransportation}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Carrier Address:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{scac.carrierAddress}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Airway Bill Prefix :</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{scac.airwayBillPrefix}} 
+    </div>                
+    </div> 
+    
+    <div *ngIf='objScacQueryErrorResponse.length>0'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Error Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objScacQueryErrorResponse[i].errorCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Error Message:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objScacQueryErrorResponse[i].errorMessage}} 
+    </div>                
+    </div>
+
+    </div>   
+
+    </div>
+
+    </div>
+    
+    <div id="FirmresponseDiv" *ngIf='objFirmsQueryf411'>
+
+    <div id="responseDiv" *ngFor='let f411 of objFirmsQueryf411; let i = index'>
+    
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>ZIP Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{f411.zipCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Country:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{f411.country}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Error Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{f411.errorCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Error Message:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{f411.errorMessage}} 
+    </div>                
+    </div>
+    
+    <div *ngIf='objFirmsQueryf211.length>0'> 
+    
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>District/Port Code :</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objFirmsQueryf211[i].district_PortCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>FIRMS Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objFirmsQueryf211[i].firmsCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Status:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objFirmsQueryf211[i].status}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Facility Type:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objFirmsQueryf211[i].facilityType}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Name of Facility:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objFirmsQueryf211[i].nameOfFacility}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Last Update:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objFirmsQueryf211[i].lastUpdate}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div *ngIf='objFirmsQueryf211.length>0'> 
+    
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Facility Address:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objFirmsQueryf311[i].facilityAddress}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>City:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objFirmsQueryf311[i].city}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>State:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objFirmsQueryf311[i].state}} 
+    </div>                
+    </div>
+
+    </div>
+
+    </div>
+
+    </div>
+
+    <div id="ADCVDresponseDiv" *ngIf='objADCVDResponseMaster'>
+    
+    <div id="raResponseDiv" *ngIf='objADCVDResponseMaster.ra'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Case Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objADCVDResponseMaster.ra.caseNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Related Case Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objADCVDResponseMaster.ra.relatedCaseNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Short Description:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objADCVDResponseMaster.ra.shortDescription}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Country Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objADCVDResponseMaster.ra.countryCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Company Case Status:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objADCVDResponseMaster.ra.companyCaseStatus}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Company Case Status Effective Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objADCVDResponseMaster.ra.companyCaseStatusEffectiveDate}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="rbResponseDiv" *ngIf='objADCVDResponseMaster.rb.length>0'>
+
+    <div id="responseDiv" *ngFor='let rb of objADCVDResponseMaster.rb; let i = index'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Case Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rb[i].caseNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Record Sequence:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rb[i].recordSequence}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Official Case Name :</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rb[i].officialCaseName}} 
+    </div>                
+    </div>
+
+    </div>
+
+    </div>
+
+    <div id="rcResponseDiv" *ngIf='objADCVDResponseMaster.rc.length>0'>
+
+    <div id="responseDiv" *ngFor='let rc of objADCVDResponseMaster.rc; let i = index'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Case Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rc[i].caseNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Record Sequence :</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rc[i].recordSequence}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Manufacturer Identification Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rc[i].manufacturerIdentificationCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Manufacturer Name:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rc[i].manufacturerName}} 
+    </div>                
+    </div>
+
+    </div>
+
+    </div>
+
+    <div id="rdResponseDiv" *ngIf='objADCVDResponseMaster.rd.length>0'>
+
+    <div id="responseDiv" *ngFor='let rd of objADCVDResponseMaster.rd; let i = index'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Case Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rd[i].caseNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Record Sequence:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rd[i].recordSequence}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Foreign Exporter Identification Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rd[i].foreignExporterIdentificationCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Foreign Exporter Name:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rd[i].foreignExporterName}} 
+    </div>                
+    </div>
+    
+    </div>
+
+    </div>
+
+    <div id="reResponseDiv" *ngIf='objADCVDResponseMaster.re'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Case Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objADCVDResponseMaster.re.caseNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Contact Office:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objADCVDResponseMaster.re.contactOffice}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Contact Name:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objADCVDResponseMaster.re.contactName}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Contact Telephone Number 1:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objADCVDResponseMaster.re.contactTelephoneNumber1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Contact Telephone Number 1 Extension:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objADCVDResponseMaster.re.contactTelephoneNumber1Extension}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Contact Telephone Number 2:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objADCVDResponseMaster.re.contactTelephoneNumber2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Contact Telephone Number 2 Extension:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objADCVDResponseMaster.re.contactTelephoneNumber2Extension}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="rfResponseDiv" *ngIf='objADCVDResponseMaster.rf.length>0'>
+
+    <div id="responseDiv" *ngFor='let rf of objADCVDResponseMaster.rf; let i = index'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Case Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rf[i].caseNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Deposit Rate Effective Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rf[i].depositRateEffectiveDate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ad Valorem Deposit Rate:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rf[i].adValoremDepositRate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Specific Deposit Rate:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rf[i].specificDepositRate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Unit of Measure:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rf[i].unitOfMeasure}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Other Unit of Measure:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rf[i].otherUnitOfMeasure}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Rate Added Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rf[i].rateAddedDate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Rate Inactivated Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rf[i].rateInactivatedDate}} 
+    </div>                
+    </div>
+    
+    </div>
+
+    </div>
+
+    <div id="rgResponseDiv" *ngIf='objADCVDResponseMaster.rg.length>0'>
+
+    <div id="responseDiv" *ngFor='let rg of objADCVDResponseMaster.rg; let i = index'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Case Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rg[i].caseNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Event Effective Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rg[i].eventEffectiveDate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Event:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rg[i].event}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Determination:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rg[i].determination}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Federal Register Citation:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rg[i].federalRegisterCitation}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Event Added Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rg[i].eventAddedDate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Event Inactivated Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rg[i].eventInactivatedDate}} 
+    </div>                
+    </div>
+
+    </div>
+
+    </div>
+
+    <div id="rhResponseDiv" *ngIf='objADCVDResponseMaster.rh.length>0'>
+
+    <div id="responseDiv" *ngFor='let rh of objADCVDResponseMaster.rh; let i = index'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Case Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rh[i].caseNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Bond/Cash Effective Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rh[i].bond_CashEffectiveDate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Bond/Cash Indicator:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rh[i].bond_CashIndicator}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Bond/Cash Indicator Added Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rh[i].bond_CashIndicatorAddedDate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Bond/Cash Indicator Inactivated Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rh[i].bond_CashIndicatorInactivatedDate}} 
+    </div>                
+    </div>
+
+    </div>
+
+    </div>
+
+    <div id="riResponseDiv" *ngIf='objADCVDResponseMaster.ri.length>0'>
+
+    <div id="responseDiv" *ngFor='let ri of objADCVDResponseMaster.ri; let i = index'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Case Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{ri[i].caseNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number 1:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{ri[i].tariffNumber1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Added Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{ri[i].addedDate1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Inactivated Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{ri[i].inactivatedDate1}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number 2:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{ri[i].tariffNumber2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Added Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{ri[i].addedDate2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Inactivated Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{ri[i].inactivatedDate2}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Tariff Number 3:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{ri[i].tariffNumber3}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Added Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{ri[i].addedDate3}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Inactivated Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{ri[i].inactivatedDate3}} 
+    </div>                
+    </div>
+
+    </div>
+
+    </div>
+
+    <div id="rjResponseDiv" *ngIf='objADCVDResponseMaster.rj.length>0'>
+
+    <div id="responseDiv" *ngFor='let rj of objADCVDResponseMaster.rj; let i = index'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Case Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rj[i].caseNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Suspension Action Effective Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rj[i].suspensionActionEffectiveDate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Suspension Action:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rj[i].suspensionAction}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Suspension Action Added Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rj[i].suspensionActionAddedDate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Suspension Action Inactivated Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rj[i].suspensionActionInactivatedDate}} 
+    </div>                
+    </div>
+
+    </div>
+
+    </div>
+
+    <div id="rxResponseDiv" *ngIf='objADCVDResponseMaster.rx.length>0'>
+
+    <div id="responseDiv" *ngFor='let rx of objADCVDResponseMaster.rx; let i = index'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Reference Data Type Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rx[i].referenceDataTypeCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Occurrence Position:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rx[i].occurrencePosition}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Reference ID Constant:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rx[i].referenceIdConstant}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Reference Data Text:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rx[i].referenceDataText}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Condition Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rx[i].conditionCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Narrative Text:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{rx[i].narrativeText}} 
+    </div>                
+    </div>
+
+    </div>
+
+    </div>
+
+
+
+
+
+    </div>    
+   
+    
+
+</div>

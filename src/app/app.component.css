@@ -1,0 +1,10 @@
+body {
+    background-color: ghostwhite;
+  }
+.container-bg{
+    background-color: #ffffff;
+    padding: 1%;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
