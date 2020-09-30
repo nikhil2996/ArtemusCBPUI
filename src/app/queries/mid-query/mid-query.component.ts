@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { NgbDateStruct , NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
-import { DatePipe } from '@angular/common';
+import { QueriesService } from '../service/queries.service';
 
 @Component({
   selector: 'app-mid-query',
@@ -12,32 +11,44 @@ import { DatePipe } from '@angular/common';
 export class MidQueryComponent implements OnInit {
   
   
-  midQueryForm = this.fb.group({});
+  midQueryForm :  FormGroup;
 
-  model: NgbDateStruct;
   
-  constructor(private fb: FormBuilder, private ngbDateParserFormatter: NgbDateParserFormatter,private datePipe: DatePipe) { }
+  constructor(private fb: FormBuilder, private queryService : QueriesService) { }
 
   ngOnInit(): void {
-    let d: Date = new Date();
 
     this.midQueryForm = this.fb.group({
       midCode : ['',Validators.required],
-      fromDate : [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}]  
     });
     
   
   }
-
-  midQueryButton(){
-    console.log(this.midQueryForm)
+  getJSONForMidQuery() {
+    var data = {
+      'manufacturerIdCode' : this.midQueryForm.value.midCode
+  };
+  return JSON.stringify(data)
   }
+  
   onGetReportsMidQuery(){
+
     console.log(this.midQueryForm.value)
-    
-    let ngbDate = this.midQueryForm.controls['fromDate'].value;
-    let myDate = this.ngbDateParserFormatter.format(ngbDate);
-    
-    console.log(this.datePipe.transform(myDate, 'yyMMdd'))
+    this.callMidQueryService(this.getJSONForMidQuery())
   }
-}
+
+  objMidQueryMaster;
+
+  callMidQueryService(data:any){
+      this.queryService.createMidQuery(data)
+    .subscribe(resp => { 
+      console.log('resp',resp); 
+      this.objMidQueryMaster = resp.body.midQueryMasterResp;
+      console.log(this.objMidQueryMaster);  
+      });   
+  }
+
+
+    
+  }
+

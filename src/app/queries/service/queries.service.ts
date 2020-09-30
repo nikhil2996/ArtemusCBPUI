@@ -40,19 +40,26 @@ export class QueriesService {
   createFirmsQuery(data: any) {
     console.log(data)
     return this.http.post<any>('http://3.231.243.179:8080/ArtemusChb/firmsquery/status', data,this.httpOptions)
-  
   }
 
   createADCVDQuery(data: any) {
     console.log(data)
     return this.http.post<any>('http://3.231.243.179:8080/ArtemusChb/adcvdquery/q1status', data,this.httpOptions)
-  
   }
 
   createADCVDQuery1(data: any) {
     console.log(data)
     return this.http.post<any>('http://3.231.243.179:8080/ArtemusChb/adcvdquery/q2status', data,this.httpOptions)
-  
+  }
+
+  createQuotaQuery(data: any) {
+    console.log(data)
+    return this.http.post<any>('http://3.231.243.179:8080/ArtemusChb/quotaquery/status', data,this.httpOptions)
+  }
+
+  createMidQuery(data: any){
+    console.log(data)
+    return this.http.post<any>('http://3.231.243.179:8080/ArtemusChb/midquery/status', data,this.httpOptions)
   }
 
   createImporterBond(data:any){

@@ -12,27 +12,14 @@
     title= " Enter MID Number ">    
     </div>           
     </div>
-    <div class="row new-form-row">
-    <div class="form-group">
-        <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" formControlName="fromDate"  
-                name="fromDate"  ngbDatepicker #d="ngbDatepicker" >
-            <div class="input-group-append">
-            <button class="btn btn-outline-secondary " (click)="d.toggle()" type="button">
-                <i class="fa fa-calendar" aria-hidden="true"></i>   
-            </button>
-            </div>
-        </div>
-    </div>
-    </div>
 
     <div class="row new-form-row">
-        <div class="col-md-10">
-        </div>
-        <div class="col-md-2">
-        <button type="submit" class="btn btn-info" (click)="midQueryButton()">Get Reports</button>
-        </div>
-        </div> 
+    <div class="col-md-10">
+    </div>
+    <div class="col-md-2">
+    <button type="submit" class="btn btn-info" [disabled]="!midQueryForm.valid">Get Reports</button>
+    </div>
+    </div> 
         
 
     <div class="row new-form-row">
@@ -44,5 +31,133 @@
     </div> 
     </form>
     
+    <hr>
+
+    <div id="masterMidQueryDiv" *ngIf='objMidQueryMaster'>
+
+    <div if="dollar1Div" *ngIf='objMidQueryMaster.dollar1'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">               
+    <span >Manufacturer ID Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objMidQueryMaster.dollar1.manufacturerIdCode}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div if="dollar2Div" *ngIf='objMidQueryMaster.dollar2'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">               
+    <span>ISO Country Code :</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objMidQueryMaster.dollar2.isoCountryCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">               
+    <span>Firm Name :</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objMidQueryMaster.dollar2.firmName}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div if="dollar3Div" *ngIf='objMidQueryMaster.dollar3'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">               
+    <span>Firm Name :</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objMidQueryMaster.dollar3.firmName}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">               
+    <span>Street :</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objMidQueryMaster.dollar3.street}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div if="dollar4Div" *ngIf='objMidQueryMaster.dollar4'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">               
+    <span>Street :</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objMidQueryMaster.dollar4.street}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">               
+    <span>City :</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objMidQueryMaster.dollar4.city}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div if="dollar5Div" *ngIf='objMidQueryMaster.dollar5'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">               
+    <span>City :</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objMidQueryMaster.dollar5.city}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">               
+    <span>ZIP or Postal Code :</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objMidQueryMaster.dollar5.zip_PortalCode}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div if="dollar7Div" *ngIf='objMidQueryMaster.dollar7'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">               
+    <span>Error Message Identifier :</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objMidQueryMaster.dollar7.errorMessageIdentifier}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">               
+    <span>Narrative Message :</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objMidQueryMaster.dollar7.narrativeMessage}} 
+    </div>                
+    </div>
+    
+    </div>
+
+    </div>
 
 </div>

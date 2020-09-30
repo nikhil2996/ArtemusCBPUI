@@ -49,13 +49,12 @@ export class MiscellaneousQueryComponent implements OnInit {
   });
 
   quoteQueryForm = this.fb.group({
-    TariffQuotaVisaNum1 : ['',Validators.required],
-    TariffQuotaVisaNum2 : ['',Validators.required],
-    countryofOrigin : [''],
-    visaQueryCriteria : ['D'] 
+    tariffQuotaVisaNum1 : ['',Validators.required],
+    tariffQuotaVisaNum2 : [''],
+    countryofOrigin : ['',Validators.required],
+    visaQueryCriteria : ['R'] 
   });
-
-
+  
   caseQueryCriteriaList=[ 
     {'code':'space','text':''},
     {'code':'A','text':'Active'},
@@ -66,13 +65,12 @@ export class MiscellaneousQueryComponent implements OnInit {
   caseQueryCriteria = 'space';
 
   visaQueryCriteriaList=[
-    {'code':'space','text':'Only quota records'},
-    {'code':'B','text':'Quota and visa records'},
-    {'code':'C','text':'All visa records for the country. Do not submit tariff or category number'},
-    {'code':'D','text':'Visa Number on file request'},
-    {'code':'V','text':'All visa records for the country and category or country and tariff number'}
+    {'code':'R','text':'Tariff Number'},
+    {'code':'X','text':'Textile Category Number'},
   ]
+
   
+
   
 
   constructor(private fb: FormBuilder, private ngbDateParserFormatter: NgbDateParserFormatter,private datePipe: DatePipe,private queryService : QueriesService) { }
@@ -97,7 +95,7 @@ export class MiscellaneousQueryComponent implements OnInit {
       tsusaNumber : [''],
       midCode : [''],
       foreignExporterIdentificationCode : [''],
-      lastDate : [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}]
+      lastDate : ['']
     })
 
     this.ADCVDFormForInactive = this.fb.group({
@@ -106,7 +104,7 @@ export class MiscellaneousQueryComponent implements OnInit {
       tsusaNumber : [''],
       midCode : [''],
       foreignExporterIdentificationCode : [''],
-      lastDate : [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}]
+      lastDate : ['']
     })
 
     this.ADCVDFormForBoth = this.fb.group({
@@ -115,8 +113,12 @@ export class MiscellaneousQueryComponent implements OnInit {
       tsusaNumber : [''],
       midCode : [''],
       foreignExporterIdentificationCode : [''],
-      lastDate : [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}]
+      lastDate : ['']
     })
+
+    
+
+    
 
     this.currentDate=this.firmsQueryFormForDistrictCode.value.beginDate;
   }
@@ -126,6 +128,7 @@ export class MiscellaneousQueryComponent implements OnInit {
     this.resetResponse();
 
   }
+  
   formsReset(){
     console.log("ResetForm")
     let d: Date = new Date();
@@ -146,7 +149,13 @@ export class MiscellaneousQueryComponent implements OnInit {
     this.firmsQueryFormForDistrictCode.patchValue({
       beginDate : this.currentDate
     })
-    this.ADCVDFormForActive.patchValue({
+    this.quoteQueryForm.patchValue({
+      visaQueryCriteria : 'R'
+    })
+   
+
+   
+   /*  this.ADCVDFormForActive.patchValue({
       lastDate : this.currentDate
     })
     this.ADCVDFormForInactive.patchValue({
@@ -154,7 +163,7 @@ export class MiscellaneousQueryComponent implements OnInit {
     })
     this.ADCVDFormForBoth.patchValue({
       lastDate : this.currentDate
-    })
+    }) */
   }
 
 
@@ -168,6 +177,7 @@ export class MiscellaneousQueryComponent implements OnInit {
     this.objFirmsQueryf311 = [];
     this.objFirmsQueryf411 =  [];
     this.objADCVDResponseMaster = '';
+    this.objQuotaQueryResponseMaster = '';
 
   }
 
@@ -302,7 +312,7 @@ export class MiscellaneousQueryComponent implements OnInit {
 
   getJSONForADCVDCBPForActive(){
     var data = {
-      'districtcompanyCaseStatusCode' : 'A',
+      'companyCaseStatus' : 'A',
       'countryCode' : this.ADCVDFormForActive.value.countryCode,
       'htsNumber' : this.ADCVDFormForActive.value.tariffNumber,
       'tsusaNumber' : this.ADCVDFormForActive.value.tsusaNumber,
@@ -319,7 +329,7 @@ export class MiscellaneousQueryComponent implements OnInit {
 
   getJSONForADCVDCBPForInactive(){
     var data = {
-      'districtcompanyCaseStatusCode' : 'I',
+      'companyCaseStatus' : 'I',
       'countryCode' : this.ADCVDFormForInactive.value.countryCode,
       'htsNumber' : this.ADCVDFormForInactive.value.tariffNumber,
       'tsusaNumber' : this.ADCVDFormForInactive.value.tsusaNumber,
@@ -332,7 +342,7 @@ export class MiscellaneousQueryComponent implements OnInit {
 
   getJSONForADCVDCBPForBoth(){
     var data = {
-      'districtcompanyCaseStatusCode' : 'B',
+      'companyCaseStatus' : 'B',
       'countryCode' : this.ADCVDFormForBoth.value.countryCode,
       'htsNumber' : this.ADCVDFormForBoth.value.tariffNumber,
       'tsusaNumber' : this.ADCVDFormForBoth.value.tsusaNumber,
@@ -380,6 +390,28 @@ export class MiscellaneousQueryComponent implements OnInit {
     this.callADCVDQueryService2(this.getJSONForADCVDCBPForActive())
   }
 
+  convertToPercentage(data){
+    if(data.rf.length>0)
+    {
+      for(let i=0;i<data.rf.length;i++){
+        
+        let per=data.rf[i].adValoremDepositRate / 100;
+        data.rf[i].adValoremDepositRate = per;
+      }
+    }
+    return data
+  }
+
+  convertToDollar(data){
+    if(data.rf.length>0)
+    {
+      for(let i=0;i<data.rf.length;i++){
+        let per=data.rf[i].specificDepositRate / 100;
+        data.rf[i].specificDepositRate = per;
+      }
+    } 
+    return data
+  }
 
   objADCVDResponseMaster;
   callADCVDQueryService(data:any) {
@@ -387,7 +419,9 @@ export class MiscellaneousQueryComponent implements OnInit {
     .subscribe(resp => { 
       console.log('resp',resp); 
       this.objADCVDResponseMaster = resp.body.adCvdMaster;
-      console.log(this.objADCVDResponseMaster)
+      this.objADCVDResponseMaster=this.convertToPercentage(this.objADCVDResponseMaster)
+      this.objADCVDResponseMaster=this.convertToDollar(this.objADCVDResponseMaster);
+      console.log("new obj",this.objADCVDResponseMaster)
       }); 
   }
 
@@ -396,15 +430,41 @@ export class MiscellaneousQueryComponent implements OnInit {
     .subscribe(resp => { 
       console.log('resp',resp); 
       this.objADCVDResponseMaster = resp.body.adCvdMaster;
-      console.log(this.objADCVDResponseMaster)
+      this.objADCVDResponseMaster=this.convertToPercentage(this.objADCVDResponseMaster)
+      this.objADCVDResponseMaster=this.convertToDollar(this.objADCVDResponseMaster);
+      console.log("new obj",this.objADCVDResponseMaster)
       }); 
   }
   onGetReportsADCVDSearch(){
     window.open("https://aceservices.cbp.dhs.gov/adcvdweb");
   }
 
+  getJSONForQuotaQuery(){
+    var data = {
+      'quotaQueryIdTypeCode' : this.quoteQueryForm.value.visaQueryCriteria,
+      'quotaQueryId' : this.quoteQueryForm.value.tariffQuotaVisaNum1,
+      'secondTariffNumber' : this.quoteQueryForm.value.tariffQuotaVisaNum2,
+      'countryOfOrigin' : this.quoteQueryForm.value.countryofOrigin,
+
+  };
+  return JSON.stringify(data)
+  }
+
   onGetReportsQuotaQuery(){
     console.log(this.quoteQueryForm.value)
+    console.log(this.getJSONForQuotaQuery());
+    this.callQuotaQueryService(this.getJSONForQuotaQuery())
+  }
+
+  objQuotaQueryResponseMaster;
+
+  callQuotaQueryService(data:any) {
+    this.queryService.createQuotaQuery(data)
+      .subscribe(resp => { 
+      console.log('resp',resp); 
+      this.objQuotaQueryResponseMaster = resp.body.quotaMasterResp;
+      console.log("objQuotaQuery",this.objQuotaQueryResponseMaster)
+      }); 
   }
 
 }

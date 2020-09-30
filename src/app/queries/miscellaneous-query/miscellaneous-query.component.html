@@ -283,7 +283,7 @@
                 </div>
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="caseNumber" name="caseNumber" title="Enter the Case Number"  
-                class="form-control form-control-sm" formControlName="caseNumber">
+                class="form-control form-control-sm" maxlength="7" formControlName="caseNumber">
                 </div>
                 </div>
 
@@ -309,7 +309,7 @@
                 </div>
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="tariffNumber" name="tariffNumber" title="A valid 8- or 10-digit tariff number located
-                in the Harmonized Tariff Schedule of the United States " class="form-control form-control-sm"
+                in the Harmonized Tariff Schedule of the United States " maxlength="10" class="form-control form-control-sm"
                 formControlName="tariffNumber">
                 </div>
                 </div>
@@ -320,7 +320,7 @@
                 </div>
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="countryCode" name="countryCode" title="The 2 character alphabetic ISO country
-                code of the AD/CVD case. "  class="form-control form-control-sm" formControlName="countryCode">
+                code of the AD/CVD case. " maxlength="2" class="form-control form-control-sm" formControlName="countryCode">
                 </div>
                 </div>
 
@@ -331,7 +331,7 @@
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="tsusaNumber" name="tsusaNumber" title="A valid 5- or 7-digit tariff number located
                 in the Tariff Schedule of the United States Annotated (TSUSA) (the commodity classification system in use in the United
-                States prior to January 1, 1989)."  class="form-control form-control-sm" formControlName="tsusaNumber">
+                States prior to January 1, 1989)." maxlength="7" class="form-control form-control-sm" formControlName="tsusaNumber">
                 </div>
                 </div>
 
@@ -341,7 +341,7 @@
                 </div>
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="midCode" name="midCode" title="A Manufacturer Identification Code (MID)
-                for a foreign manufacturer as assigned to one or more AD/CVD cases." class="form-control form-control-sm" 
+                for a foreign manufacturer as assigned to one or more AD/CVD cases." maxlength="15" class="form-control form-control-sm" 
                 formControlName="midCode">
                 </div>
                 </div>
@@ -353,7 +353,7 @@
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="foreignExporterIdentificationCode" name="foreignExporterIdentificationCode" 
                 title="An identification code for a foreign exporter as assigned to one or more AD/CVD cases." 
-                class="form-control form-control-sm" formControlName="foreignExporterIdentificationCode">
+                class="form-control form-control-sm" maxlength="15" formControlName="foreignExporterIdentificationCode">
                 </div>
                 </div>
 
@@ -363,7 +363,7 @@
                 </div>
                 <div class="col-md-3 form-lable"> 
                 <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd" formControlName="lastDate"  
+                <input class="form-control"  formControlName="lastDate"  
                 name="lastDate"  ngbDatepicker #d="ngbDatepicker" >
                 <div class="input-group-append">
                 <button class="btn btn-outline-secondary " (click)="d.toggle()" type="button">
@@ -396,7 +396,7 @@
                 </div>
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="tariffNumber" name="tariffNumber" title="A valid 8- or 10-digit tariff number located
-                in the Harmonized Tariff Schedule of the United States " class="form-control form-control-sm"
+                in the Harmonized Tariff Schedule of the United States " maxlength="10" class="form-control form-control-sm"
                 formControlName="tariffNumber">
                 </div>
                 </div>
@@ -407,7 +407,7 @@
                 </div>
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="countryCode" name="countryCode" title="The 2 character alphabetic ISO country
-                code of the AD/CVD case. "  class="form-control form-control-sm" formControlName="countryCode">
+                code of the AD/CVD case. " maxlength="2" class="form-control form-control-sm" formControlName="countryCode">
                 </div>
                 </div>
 
@@ -418,7 +418,7 @@
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="tsusaNumber" name="tsusaNumber" title="A valid 5- or 7-digit tariff number located
                 in the Tariff Schedule of the United States Annotated (TSUSA) (the commodity classification system in use in the United
-                States prior to January 1, 1989)."  class="form-control form-control-sm" formControlName="tsusaNumber">
+                States prior to January 1, 1989)." maxlength="7" class="form-control form-control-sm" formControlName="tsusaNumber">
                 </div>
                 </div>
 
@@ -428,7 +428,7 @@
                 </div>
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="midCode" name="midCode" title="A Manufacturer Identification Code (MID)
-                for a foreign manufacturer as assigned to one or more AD/CVD cases." class="form-control form-control-sm" 
+                for a foreign manufacturer as assigned to one or more AD/CVD cases."  maxlength="15" class="form-control form-control-sm" 
                 formControlName="midCode">
                 </div>
                 </div>
@@ -440,7 +440,7 @@
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="foreignExporterIdentificationCode" name="foreignExporterIdentificationCode" 
                 title="An identification code for a foreign exporter as assigned to one or more AD/CVD cases." 
-                class="form-control form-control-sm" formControlName="foreignExporterIdentificationCode">
+                class="form-control form-control-sm" maxlength="15" formControlName="foreignExporterIdentificationCode">
                 </div>
                 </div>
 
@@ -450,7 +450,7 @@
                 </div>
                 <div class="col-md-3 form-lable"> 
                 <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd" formControlName="lastDate"  
+                <input class="form-control" formControlName="lastDate"  
                 name="lastDate"  ngbDatepicker #d="ngbDatepicker" >
                 <div class="input-group-append">
                 <button class="btn btn-outline-secondary " (click)="d.toggle()" type="button">
@@ -482,7 +482,7 @@
                 </div>
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="tariffNumber" name="tariffNumber" title="A valid 8- or 10-digit tariff number located
-                in the Harmonized Tariff Schedule of the United States " class="form-control form-control-sm"
+                in the Harmonized Tariff Schedule of the United States " maxlength="10" class="form-control form-control-sm"
                 formControlName="tariffNumber">
                 </div>
                 </div>
@@ -493,7 +493,7 @@
                 </div>
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="countryCode" name="countryCode" title="The 2 character alphabetic ISO country
-                code of the AD/CVD case. "  class="form-control form-control-sm" formControlName="countryCode">
+                code of the AD/CVD case. " maxlength="2" class="form-control form-control-sm" formControlName="countryCode">
                 </div>
                 </div>
 
@@ -504,7 +504,7 @@
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="tsusaNumber" name="tsusaNumber" title="A valid 5- or 7-digit tariff number located
                 in the Tariff Schedule of the United States Annotated (TSUSA) (the commodity classification system in use in the United
-                States prior to January 1, 1989)."  class="form-control form-control-sm" formControlName="tsusaNumber">
+                States prior to January 1, 1989)." maxlength="7"  class="form-control form-control-sm" formControlName="tsusaNumber">
                 </div>
                 </div>
 
@@ -514,7 +514,7 @@
                 </div>
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="midCode" name="midCode" title="A Manufacturer Identification Code (MID)
-                for a foreign manufacturer as assigned to one or more AD/CVD cases." class="form-control form-control-sm" 
+                for a foreign manufacturer as assigned to one or more AD/CVD cases." maxlength="15" class="form-control form-control-sm" 
                 formControlName="midCode">
                 </div>
                 </div>
@@ -525,7 +525,7 @@
                 </div>
                 <div class="col-md-3 form-lable"> 
                 <input type="text" id="foreignExporterIdentificationCode" name="foreignExporterIdentificationCode" 
-                title="An identification code for a foreign exporter as assigned to one or more AD/CVD cases." 
+                title="An identification code for a foreign exporter as assigned to one or more AD/CVD cases." maxlength="15"
                 class="form-control form-control-sm" formControlName="foreignExporterIdentificationCode">
                 </div>
                 </div>
@@ -536,7 +536,7 @@
                 </div>
                 <div class="col-md-3 form-lable"> 
                 <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd" formControlName="lastDate"  
+                <input class="form-control"  formControlName="lastDate"  
                 name="lastDate"  ngbDatepicker #d="ngbDatepicker" >
                 <div class="input-group-append">
                 <button class="btn btn-outline-secondary " (click)="d.toggle()" type="button">
@@ -578,8 +578,8 @@
                 <span >Tariff/Quota/Visa 1:</span>           
                 </div>
                 <div class="col-md-3 form-lable"> 
-                <input type="text" id="TariffQuotaVisaNum1" name="TariffQuotaVisaNum1"   
-                class="form-control form-control-sm" formControlName="TariffQuotaVisaNum1">
+                <input type="text" id="tariffQuotaVisaNum1" name="tariffQuotaVisaNum1"  maxlength="10" 
+                class="form-control form-control-sm" formControlName="tariffQuotaVisaNum1">
                 </div>
                 </div>
                 <div class="row new-form-row"> 
@@ -587,8 +587,8 @@
                 <span >Tariff/Quota/Visa  2:</span>           
                 </div>
                 <div class="col-md-3 form-lable"> 
-                <input type="text" id="TariffQuotaVisaNum2" name="TariffQuotaVisaNum2"   
-                class="form-control form-control-sm" formControlName="TariffQuotaVisaNum2">
+                <input type="text" id="tariffQuotaVisaNum2" name="tariffQuotaVisaNum2"  maxlength="10"  
+                class="form-control form-control-sm" formControlName="tariffQuotaVisaNum2">
                 </div>
                 </div>
                 <div class="row new-form-row"> 
@@ -596,7 +596,7 @@
                 <span >Country of Origin:</span>           
                 </div>
                 <div class="col-md-3 form-lable"> 
-                <input type="text" id="countryofOrigin" name="countryofOrigin"   
+                <input type="text" id="countryofOrigin" name="countryofOrigin"   maxlength="2"
                 class="form-control form-control-sm" formControlName="countryofOrigin">
                 </div>
                 </div>
@@ -607,7 +607,7 @@
                 <div class="col-md-3 form-lable"> 
                 <select class="form-control form-control-sm" id="visaQueryCriteria" 
                 name="visaQueryCriteria" formControlName="visaQueryCriteria">
-                <option *ngFor="let visaQueryCriteria of visaQueryCriteriaList" [ngValue]="visaQueryCriteria.code">{{ visaQueryCriteria.text }}</option>
+                <option *ngFor="let visaQuery of visaQueryCriteriaList" [ngValue]="visaQuery.code">{{ visaQuery.text }}</option>
                 </select> 
                 </div>
                 </div>
@@ -2461,7 +2461,7 @@
     <span>Case Number:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rb[i].caseNumber}} 
+    {{rb.caseNumber}} 
     </div>                
     </div>
 
@@ -2470,7 +2470,7 @@
     <span>Record Sequence:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rb[i].recordSequence}} 
+    {{rb.recordSequence}} 
     </div>                
     </div>
 
@@ -2479,7 +2479,7 @@
     <span>Official Case Name :</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rb[i].officialCaseName}} 
+    {{rb.officialCaseName}} 
     </div>                
     </div>
 
@@ -2496,7 +2496,7 @@
     <span>Case Number:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rc[i].caseNumber}} 
+    {{rc.caseNumber}} 
     </div>                
     </div>
 
@@ -2505,7 +2505,7 @@
     <span>Record Sequence :</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rc[i].recordSequence}} 
+    {{rc.recordSequence}} 
     </div>                
     </div>
 
@@ -2514,7 +2514,7 @@
     <span>Manufacturer Identification Code:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rc[i].manufacturerIdentificationCode}} 
+    {{rc.manufacturerIdentificationCode}} 
     </div>                
     </div>
 
@@ -2523,7 +2523,7 @@
     <span>Manufacturer Name:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rc[i].manufacturerName}} 
+    {{rc.manufacturerName}} 
     </div>                
     </div>
 
@@ -2540,7 +2540,7 @@
     <span>Case Number:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rd[i].caseNumber}} 
+    {{rd.caseNumber}} 
     </div>                
     </div>
 
@@ -2549,7 +2549,7 @@
     <span>Record Sequence:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rd[i].recordSequence}} 
+    {{rd.recordSequence}} 
     </div>                
     </div>
 
@@ -2558,7 +2558,7 @@
     <span>Foreign Exporter Identification Code:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rd[i].foreignExporterIdentificationCode}} 
+    {{rd.foreignExporterIdentificationCode}} 
     </div>                
     </div>
 
@@ -2567,7 +2567,7 @@
     <span>Foreign Exporter Name:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rd[i].foreignExporterName}} 
+    {{rd.foreignExporterName}} 
     </div>                
     </div>
     
@@ -2651,7 +2651,7 @@
     <span>Case Number:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rf[i].caseNumber}} 
+    {{rf.caseNumber}} 
     </div>                
     </div>
 
@@ -2660,7 +2660,7 @@
     <span>Deposit Rate Effective Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rf[i].depositRateEffectiveDate}} 
+    {{rf.depositRateEffectiveDate}} 
     </div>                
     </div>
 
@@ -2669,7 +2669,7 @@
     <span>Ad Valorem Deposit Rate:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rf[i].adValoremDepositRate}} 
+    {{rf.adValoremDepositRate}}%
     </div>                
     </div>
 
@@ -2678,7 +2678,7 @@
     <span>Specific Deposit Rate:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rf[i].specificDepositRate}} 
+    ${{rf.specificDepositRate}} 
     </div>                
     </div>
 
@@ -2687,7 +2687,7 @@
     <span>Unit of Measure:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rf[i].unitOfMeasure}} 
+    {{rf.unitOfMeasure}} 
     </div>                
     </div>
 
@@ -2696,7 +2696,7 @@
     <span>Other Unit of Measure:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rf[i].otherUnitOfMeasure}} 
+    {{rf.otherUnitOfMeasure}} 
     </div>                
     </div>
 
@@ -2705,7 +2705,7 @@
     <span>Rate Added Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rf[i].rateAddedDate}} 
+    {{rf.rateAddedDate}} 
     </div>                
     </div>
 
@@ -2714,7 +2714,7 @@
     <span>Rate Inactivated Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rf[i].rateInactivatedDate}} 
+    {{rf.rateInactivatedDate}} 
     </div>                
     </div>
     
@@ -2731,7 +2731,7 @@
     <span>Case Number:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rg[i].caseNumber}} 
+    {{rg.caseNumber}} 
     </div>                
     </div>
 
@@ -2740,7 +2740,7 @@
     <span>Event Effective Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rg[i].eventEffectiveDate}} 
+    {{rg.eventEffectiveDate}} 
     </div>                
     </div>
 
@@ -2749,7 +2749,7 @@
     <span>Event:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rg[i].event}} 
+    {{rg.event}} 
     </div>                
     </div>
 
@@ -2758,7 +2758,7 @@
     <span>Determination:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rg[i].determination}} 
+    {{rg.determination}} 
     </div>                
     </div>
 
@@ -2767,7 +2767,7 @@
     <span>Federal Register Citation:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rg[i].federalRegisterCitation}} 
+    {{rg.federalRegisterCitation}} 
     </div>                
     </div>
 
@@ -2776,7 +2776,7 @@
     <span>Event Added Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rg[i].eventAddedDate}} 
+    {{rg.eventAddedDate}} 
     </div>                
     </div>
 
@@ -2785,7 +2785,7 @@
     <span>Event Inactivated Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rg[i].eventInactivatedDate}} 
+    {{rg.eventInactivatedDate}} 
     </div>                
     </div>
 
@@ -2802,7 +2802,7 @@
     <span>Case Number:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rh[i].caseNumber}} 
+    {{rh.caseNumber}} 
     </div>                
     </div>
 
@@ -2811,7 +2811,7 @@
     <span>Bond/Cash Effective Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rh[i].bond_CashEffectiveDate}} 
+    {{rh.bond_CashEffectiveDate}} 
     </div>                
     </div>
 
@@ -2820,7 +2820,7 @@
     <span>Bond/Cash Indicator:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rh[i].bond_CashIndicator}} 
+    {{rh.bond_CashIndicator}} 
     </div>                
     </div>
 
@@ -2829,7 +2829,7 @@
     <span>Bond/Cash Indicator Added Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rh[i].bond_CashIndicatorAddedDate}} 
+    {{rh.bond_CashIndicatorAddedDate}} 
     </div>                
     </div>
 
@@ -2838,7 +2838,7 @@
     <span>Bond/Cash Indicator Inactivated Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rh[i].bond_CashIndicatorInactivatedDate}} 
+    {{rh.bond_CashIndicatorInactivatedDate}} 
     </div>                
     </div>
 
@@ -2855,7 +2855,7 @@
     <span>Case Number:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{ri[i].caseNumber}} 
+    {{ri.caseNumber}} 
     </div>                
     </div>
 
@@ -2864,7 +2864,7 @@
     <span>Tariff Number 1:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{ri[i].tariffNumber1}} 
+    {{ri.tariffNumber1}} 
     </div>                
     </div>
 
@@ -2873,7 +2873,7 @@
     <span>Added Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{ri[i].addedDate1}} 
+    {{ri.addedDate1}} 
     </div>                
     </div>
 
@@ -2882,7 +2882,7 @@
     <span>Inactivated Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{ri[i].inactivatedDate1}} 
+    {{ri.inactivatedDate1}} 
     </div>                
     </div>
 
@@ -2891,7 +2891,7 @@
     <span>Tariff Number 2:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{ri[i].tariffNumber2}} 
+    {{ri.tariffNumber2}} 
     </div>                
     </div>
 
@@ -2900,7 +2900,7 @@
     <span>Added Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{ri[i].addedDate2}} 
+    {{ri.addedDate2}} 
     </div>                
     </div>
 
@@ -2909,7 +2909,7 @@
     <span>Inactivated Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{ri[i].inactivatedDate2}} 
+    {{ri.inactivatedDate2}} 
     </div>                
     </div>
 
@@ -2918,7 +2918,7 @@
     <span>Tariff Number 3:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{ri[i].tariffNumber3}} 
+    {{ri.tariffNumber3}} 
     </div>                
     </div>
 
@@ -2927,7 +2927,7 @@
     <span>Added Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{ri[i].addedDate3}} 
+    {{ri.addedDate3}} 
     </div>                
     </div>
 
@@ -2936,7 +2936,7 @@
     <span>Inactivated Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{ri[i].inactivatedDate3}} 
+    {{ri.inactivatedDate3}} 
     </div>                
     </div>
 
@@ -2953,7 +2953,7 @@
     <span>Case Number:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rj[i].caseNumber}} 
+    {{rj.caseNumber}} 
     </div>                
     </div>
 
@@ -2962,7 +2962,7 @@
     <span>Suspension Action Effective Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rj[i].suspensionActionEffectiveDate}} 
+    {{rj.suspensionActionEffectiveDate}} 
     </div>                
     </div>
 
@@ -2971,7 +2971,7 @@
     <span>Suspension Action:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rj[i].suspensionAction}} 
+    {{rj.suspensionAction}} 
     </div>                
     </div>
 
@@ -2980,7 +2980,7 @@
     <span>Suspension Action Added Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rj[i].suspensionActionAddedDate}} 
+    {{rj.suspensionActionAddedDate}} 
     </div>                
     </div>
 
@@ -2989,7 +2989,7 @@
     <span>Suspension Action Inactivated Date:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rj[i].suspensionActionInactivatedDate}} 
+    {{rj.suspensionActionInactivatedDate}} 
     </div>                
     </div>
 
@@ -3006,7 +3006,7 @@
     <span>Reference Data Type Code:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rx[i].referenceDataTypeCode}} 
+    {{rx.referenceDataTypeCode}} 
     </div>                
     </div>
 
@@ -3015,7 +3015,7 @@
     <span>Occurrence Position:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rx[i].occurrencePosition}} 
+    {{rx.occurrencePosition}} 
     </div>                
     </div>
 
@@ -3024,7 +3024,7 @@
     <span>Reference ID Constant:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rx[i].referenceIdConstant}} 
+    {{rx.referenceIdConstant}} 
     </div>                
     </div>
 
@@ -3033,7 +3033,7 @@
     <span>Reference Data Text:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rx[i].referenceDataText}} 
+    {{rx.referenceDataText}} 
     </div>                
     </div>
 
@@ -3042,7 +3042,7 @@
     <span>Condition Code:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rx[i].conditionCode}} 
+    {{rx.conditionCode}} 
     </div>                
     </div>
 
@@ -3051,7 +3051,167 @@
     <span>Narrative Text:</span>
     </div>
     <div class="col-md-6 form-lable">     
-    {{rx[i].narrativeText}} 
+    {{rx.narrativeText}} 
+    </div>                
+    </div>
+
+    </div>
+    
+    </div>
+
+    </div>    
+   
+    <div id="quotaQueryResponseDiv" *ngIf='objQuotaQueryResponseMaster'>
+    
+    <div id="q5ResponseDiv" *ngIf='objQuotaQueryResponseMaster.q5'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Quota Query ID Type Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objQuotaQueryResponseMaster.q5.quotaQueryIdTypeCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Quota Query ID:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objQuotaQueryResponseMaster.q5.quotaQueryId}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Country of Origin:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objQuotaQueryResponseMaster.q5.countryOfOrigin}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Condition Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objQuotaQueryResponseMaster.q5.conditionCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Narrative Text:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{objQuotaQueryResponseMaster.q5.narrativeText}} 
+    </div>                
+    </div>
+
+    </div>
+
+    <div id="q2ResponseDiv" *ngIf='objQuotaQueryResponseMaster.q2.length>0'>
+
+    <div id="responseDiv" *ngFor='let q2 of objQuotaQueryResponseMaster.q2; let i = index'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Quota Query ID Type Code:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q2.quotaQueryIdTypeCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Quota Query ID:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q2.quotaQueryId}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Quota ID:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q2.quotaId}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Country of Origin:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q2.countryOfOrigin}} 
+    </div>                
+    </div> 
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Quota Limit:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q2.quotaLimit}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Unit of Measure Code :</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q2.unitOfMeasureCode}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Textile Conversion Factor:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q2.textileConversionFactor}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Beginning Period Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q2.beginningPeriodDate}} 
+    </div>                
+    </div>
+    
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Ending Period Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q2.endingPeriodDate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Quota Period:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q2.quotaPeriod}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Threshold Quantity:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q2.thresholdQuantity}} 
     </div>                
     </div>
 
@@ -3059,12 +3219,114 @@
 
     </div>
 
+    <div id="q3ResponseDiv" *ngIf='objQuotaQueryResponseMaster.q3.length>0'>
 
+    <div id="responseDiv" *ngFor='let q3 of objQuotaQueryResponseMaster.q3; let i = index'>
 
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Global Indicator:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q3.globalIndicator}} 
+    </div>                
+    </div>
 
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Period Processing Indicator:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q3.periodProcessingIndicator}} 
+    </div>                
+    </div>
 
-    </div>    
-   
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Description:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q3.description}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Quota Type:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q3.quotaType}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Quantity to Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q3.quantityToDate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Record Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q3.recordNumber}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Second Tariff Number:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q3.secondTariffNumber}} 
+    </div>                
+    </div>
+
+    </div>
+
+    </div>
+
+    <div id="q4ResponseDiv" *ngIf='objQuotaQueryResponseMaster.q4.length>0'>
+
+    <div id="responseDiv" *ngFor='let q4 of objQuotaQueryResponseMaster.q4; let i = index'>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Last Quota Transaction Date:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q4.lastQuotaTransactionDate}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Date of Status:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q4.dateOfStatus}} 
+    </div>                
+    </div>
+
+    <div class="row new-form-row"> 
+    <div class="col-md-6 form-lable">
+    <span>Time of Status:</span>
+    </div>
+    <div class="col-md-6 form-lable">     
+    {{q4.timeOfStatus}} 
+    </div>                
+    </div>
+
+    </div>
+
+    </div>
+
+    </div>
+
     
 
 </div>

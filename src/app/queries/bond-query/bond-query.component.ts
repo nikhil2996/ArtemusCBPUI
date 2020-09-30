@@ -64,11 +64,8 @@ export class BondQueryComponent implements OnInit {
     .subscribe(resp => { 
       console.log('resp',resp); 
       this.objImporterBondMaster = resp.body.statusImporter;
-      console.log(this.objImporterBondMaster);
-
-       
+      console.log(this.objImporterBondMaster);  
       });   
-
   }
 
   ngOnInit(): void {
